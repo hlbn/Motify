@@ -1,6 +1,6 @@
 //
 
-
+import FirebaseCore
 import Foundation
 import UIKit
 
@@ -24,6 +24,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 private extension AppDelegate {
     
     func setupFirebase() {
-        
+        FirebaseApp.configure()
     }
 }

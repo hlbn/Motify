@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Motify.xcodeproj">
+      location = "group:Kits">
+   </FileRef>
+   <FileRef
+      location = "group:Motify/Motify.xcodeproj">
    </FileRef>
 </Workspace>
