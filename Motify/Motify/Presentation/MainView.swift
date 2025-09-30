@@ -4,7 +4,10 @@
 import SwiftUI
 
 
-struct ContentView: View {
+struct MainView: View {
+    
+    // MARK: - Body
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,6 +19,9 @@ struct ContentView: View {
     }
 }
 
+
+// MARK: - Preview
+
 #Preview {
-    ContentView()
+    MainView()
 }

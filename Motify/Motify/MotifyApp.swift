@@ -1,7 +1,7 @@
 //
 
-
 import SwiftUI
+
 
 @main
 struct MotifyApp: App {
@@ -14,7 +14,7 @@ struct MotifyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AuthView()
         }
     }
 }
