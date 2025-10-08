@@ -76,6 +76,7 @@
 				A4BBB11F2E82FE6E00E1F4C7 /* Sources */,
 				A4BBB1202E82FE6E00E1F4C7 /* Frameworks */,
 				A4BBB1212E82FE6E00E1F4C7 /* Resources */,
+				A4B8C6D22E96A501006F7151 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -140,6 +141,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A4B8C6D22E96A501006F7151 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n    echo \"Skipping SwiftLint script because of preview mode\"\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n    pushd ..\n    swiftlint --quiet\n    popd  \nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A4BBB11F2E82FE6E00E1F4C7 /* Sources */ = {
@@ -282,6 +305,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M87B34Q5JM;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Motify;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
@@ -319,6 +343,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M87B34Q5JM;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Motify;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";

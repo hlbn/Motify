@@ -14,7 +14,7 @@ public struct LoadingViewModifier: ViewModifier {
     
     
     // MARK: - Body
-
+    
     public func body(content: Content) -> some View {
         content
             .disabled(isLoading)
@@ -23,20 +23,11 @@ public struct LoadingViewModifier: ViewModifier {
                     if !isTransparent {
                         Color.white.ignoresSafeArea()
                     }
-                     
-                    Image(systemName: "dumbbell.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50)
-                        .rotationEffect(isRotating ? .degrees(360) : .zero)
-                        .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isRotating)
-                       
+                    
+                    
+                    ProgressView()
                 }
             }
-            .onChange(of: isLoading) { _, newValue in
-                isRotating = newValue
-            }
-        
     }
 
 

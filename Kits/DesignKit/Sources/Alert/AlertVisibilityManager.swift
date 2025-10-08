@@ -46,8 +46,8 @@ struct AlertVisibilityManager: ViewModifier {
                     }
                 }
             )
-            .onChange(of: bindingAlert) {
-                presentingAlert = $0
+            .onChange(of: bindingAlert) { _, newValue in
+                presentingAlert = newValue
             }
     }
 }

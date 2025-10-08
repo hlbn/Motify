@@ -60,7 +60,7 @@ final class LoginViewModel: ObservableObject {
     // MARK: - Actions
     
     func onLoginTap(router: AuthRouter) async {
-        await performLogin(router: router, username: state.email, password: state.password, isBiometry: false)
+        await performLogin(router: router, username: state.email, password: state.password)
     }
     
     func onEmailChange() {
@@ -84,7 +84,7 @@ private extension LoginViewModel {
         state.email = deps.loginClient.savedCredentials?.username ?? .empty
     }
     
-    func performLogin(router: AuthRouter, username: String, password: String, isBiometry: Bool) async {
+    func performLogin(router: AuthRouter, username: String, password: String) async {
         UIApplication.hideKeyboard()
         
         state.isLoading = true
@@ -92,10 +92,7 @@ private extension LoginViewModel {
         do {
             try await deps.authClient.login(username, password)
             
-            // We do not need to resave when using biometry, credentials are already stored
-            if !isBiometry {
-                deps.loginClient.savedCredentials = .init(username: username, password: password)
-            }
+            deps.loginClient.savedCredentials = .init(username: username, password: password)
             
             state.password = .empty
             
