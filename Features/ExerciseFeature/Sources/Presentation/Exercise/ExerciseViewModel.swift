@@ -7,6 +7,7 @@ import NavigationKit
 import OSLog
 import SwiftUI
 import UIKit
+import Dependencies
 import UtilityKit
 
 
@@ -43,12 +44,7 @@ struct ExerciseViewState {
 final class ExerciseViewModel: ObservableObject {
     
     struct Input {
-        let exerciseEntity: ExerciseEntity?
-    }
-    
-    struct Dependencies {
-        let exerciseClient: ExerciseClient
-        let authClient: AuthClient
+        let exerciseVO: ExerciseVO?
     }
     
     
@@ -59,21 +55,18 @@ final class ExerciseViewModel: ObservableObject {
 
     // MARK: - Services
 
-    private let deps: Dependencies
+    @Dependency(ExerciseClient.self) private var exerciseClient
+    @Dependency(AuthClient.self) private var authClient
 
 
     // MARK: - Init
 
-    init(
-        input: Input,
-        deps: Dependencies
-    ) {
-        if let exerciseEntity = input.exerciseEntity, let exercise = ExerciseVOMapper.map(exerciseEntity) {
-            self.state = .init(exerciseVO: exercise, displayMode: .edit)
+    init(input: Input) {
+        if let exerciseVO = input.exerciseVO {
+            self.state = .init(exerciseVO: exerciseVO, displayMode: .edit)
         } else {
             self.state = .init(exerciseVO: .empty, displayMode: .add, isCreating: true, didEdit: true)
         }
-        self.deps = deps
     }
     
     
@@ -129,13 +122,11 @@ private extension ExerciseViewModel {
     }
     
     func saveExercise(dismiss: DismissAction) {
-        let exerciseToSave = ExerciseEntityMapper.map(state.exerciseVO)
-        
         UIApplication.hideKeyboard()
         state.isLoading = true
         
         do {
-            try deps.exerciseClient.saveExercise(exerciseToSave, state.exerciseVO.id)
+            try exerciseClient.saveExercise(state.exerciseVO, state.exerciseVO.id)
         } catch {
             state.alert = .init(
                 title: "exercise.save.server.error".localized,

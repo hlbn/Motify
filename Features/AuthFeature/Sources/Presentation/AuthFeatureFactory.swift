@@ -8,18 +8,12 @@ import SwiftUI
 public enum AuthFeatureFactory {
     
     public static func createLoginView() -> some View {
-        let viewModel = LoginViewModel(
-            deps: .init(loginClient: .live, authClient: .live)
-        )
-        
+        let viewModel = LoginViewModel()
         return LoginView(viewModel: viewModel)
     }
     
     public static func createRegisterView() -> some View {
-        let viewModel = RegisterViewModel(
-            deps: .init(authClient: .live)
-        )
-        
+        let viewModel = RegisterViewModel()
         return RegisterView(viewModel: viewModel)
     }
 }

@@ -48,11 +48,7 @@ struct ExerciseView: View {
 #Preview("ExerciseView") {
     ExerciseView(
         viewModel: .init(
-            input: .init(exerciseEntity: nil),
-            deps: .init(
-                exerciseClient: .preview,
-                authClient: .preview
-            )
+            input: .init(exerciseVO: nil)
         )
     )
     .inNavigationView()

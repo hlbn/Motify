@@ -1,13 +1,16 @@
 //
 
 import Foundation
+import Dependencies
+import FirebaseKit
 
 
-public extension ExerciseClient {
+// MARK: - Dependency registration
+
+extension ExerciseClient: DependencyKey {
     
-    static var live: Self {
-        let exerciseService = ExerciseService(authClient: .live)
-        
+    public static var liveValue: ExerciseClient {
+        let exerciseService = ExerciseService()
         return .init(
             fetchExercises: exerciseService.fetchExercises,
             saveExercise: exerciseService.saveExercise,

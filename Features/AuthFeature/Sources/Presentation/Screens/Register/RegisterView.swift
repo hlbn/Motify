@@ -101,11 +101,7 @@ struct RegisterView: View {
 
 #Preview("RegisterView") {
     RegisterView(
-        viewModel: .init(
-            deps: .init(
-                authClient: .preview
-            )
-        )
+        viewModel: .init()
     )
     .inNavigationView()
 }

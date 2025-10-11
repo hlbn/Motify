@@ -7,8 +7,8 @@ import SwiftUI
 
 
 public enum ExercisePath: Hashable {
-    case exercise(ExerciseEntity?)
-    case exerciseDetail(ExerciseEntity)
+    case exercise(ExerciseVO?)
+    case exerciseDetail(ExerciseVO)
 }
 
 @MainActor
@@ -26,7 +26,7 @@ public final class ExerciseRouter: ObservableObject {
     
     // MARK: - Interface
     
-    public func showExerciseDetail(exercise: ExerciseEntity) {
+    public func showExerciseDetail(exercise: ExerciseVO) {
         path.append(.exerciseDetail(exercise))
     }
     
@@ -34,7 +34,7 @@ public final class ExerciseRouter: ObservableObject {
         path.append(.exercise(nil))
     }
     
-    public func showExerciseEdit(exercise: ExerciseEntity) {
+    public func showExerciseEdit(exercise: ExerciseVO) {
         path.append(.exercise(exercise))
     }
 }

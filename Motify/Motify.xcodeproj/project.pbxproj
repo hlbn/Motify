@@ -13,6 +13,7 @@
 		A4C73D8D2E8448B300E85E87 /* FirebaseKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8C2E8448B300E85E87 /* FirebaseKit */; };
 		A4C73D8F2E8448B300E85E87 /* NavigationKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8E2E8448B300E85E87 /* NavigationKit */; };
 		A4C73D912E8448B300E85E87 /* UtilityKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D902E8448B300E85E87 /* UtilityKit */; };
+		A4E778CA2E9AD41700E4BC5C /* FirebaseKitLive in Frameworks */ = {isa = PBXBuildFile; productRef = A4E778C92E9AD41700E4BC5C /* FirebaseKitLive */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 			files = (
 				A4C73D8D2E8448B300E85E87 /* FirebaseKit in Frameworks */,
 				A4B86CF12E8C56A5008F052D /* AuthFeature in Frameworks */,
+				A4E778CA2E9AD41700E4BC5C /* FirebaseKitLive in Frameworks */,
 				A4C73D8B2E8448B300E85E87 /* DesignKit in Frameworks */,
 				A4B16B862E9AA87A00DBD4F7 /* ExerciseFeature in Frameworks */,
 				A4C73D912E8448B300E85E87 /* UtilityKit in Frameworks */,
@@ -95,6 +97,7 @@
 				A4C73D902E8448B300E85E87 /* UtilityKit */,
 				A4B86CF02E8C56A5008F052D /* AuthFeature */,
 				A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */,
+				A4E778C92E9AD41700E4BC5C /* FirebaseKitLive */,
 			);
 			productName = Motify;
 			productReference = A4BBB1232E82FE6E00E1F4C7 /* Motify.app */;
@@ -427,6 +430,10 @@
 		A4C73D902E8448B300E85E87 /* UtilityKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UtilityKit;
+		};
+		A4E778C92E9AD41700E4BC5C /* FirebaseKitLive */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseKitLive;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

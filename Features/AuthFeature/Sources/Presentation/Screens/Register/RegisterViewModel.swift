@@ -4,6 +4,7 @@ import DesignKit
 import FirebaseKit
 import Foundation
 import SwiftUI
+import Dependencies
 import UtilityKit
 
 
@@ -36,11 +37,6 @@ struct RegisterViewState {
 @MainActor
 final class RegisterViewModel: ObservableObject {
     
-    struct Dependencies {
-        let authClient: AuthClient
-    }
-    
-    
     // MARK: - State
 
     @Published var state = RegisterViewState()
@@ -48,16 +44,7 @@ final class RegisterViewModel: ObservableObject {
 
     // MARK: - Services
 
-    private let deps: Dependencies
-
-
-    // MARK: - Init
-
-    init(
-        deps: Dependencies
-    ) {
-        self.deps = deps
-    }
+    @Dependency(AuthClient.self) private var authClient
     
     
     // MARK: - Actions
@@ -66,7 +53,7 @@ final class RegisterViewModel: ObservableObject {
         state.isLoading = true
         
         do {
-            try await deps.authClient.register(state.email, state.password)
+            try await authClient.register(state.email, state.password)
             
             state.alert = .init(
                 title: "register.successful.title".localized,

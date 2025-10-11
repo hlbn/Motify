@@ -1,11 +1,14 @@
 //
 
+import Dependencies
 import Foundation
 
 
-extension LoginClient {
+// MARK: - Dependency registration
+
+extension LoginClient: DependencyKey {
     
-    static var live: Self {
+    public static var liveValue: LoginClient {
         let service = LoginService(defaults: .standard)
         return .init(
             savedCredentials: .property(service, keyPath: \.savedCredentials),

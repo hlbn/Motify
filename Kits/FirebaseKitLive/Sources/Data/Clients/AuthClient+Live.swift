@@ -1,17 +1,21 @@
 //
 
 import Foundation
+import FirebaseKit
+import Dependencies
 
 
-public extension AuthClient {
+// MARK: - Dependency registration
+
+extension AuthClient: DependencyKey {
     
-    static var live: Self {
+    public static var liveValue: AuthClient {
         let service = AuthService()
         return .init(
             login: service.login,
             register: service.register,
             logout: service.logout,
-            getCurrentUser: service.getCurrentUser
+            getCurrentUserId: service.getCurrentUserId
         )
     }
 }

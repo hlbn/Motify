@@ -61,21 +61,7 @@ struct ExerciseListView: View {
 
 #Preview("ExerciseListView") {
     ExerciseListView(
-        viewModel: .init(
-            deps: .init(exerciseClient: .preview)
-        )
-    )
-    .inNavigationView()
-    .environmentObject(ExerciseRouter())
-}
-
-#Preview("ExerciseListView - empty") {
-    ExerciseListView(
-        viewModel: .init(
-            deps: update(.init(exerciseClient: .preview)) {
-                $0.exerciseClient.fetchExercises = { [] }
-            }
-        )
+        viewModel: .init()
     )
     .inNavigationView()
     .environmentObject(ExerciseRouter())

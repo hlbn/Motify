@@ -86,12 +86,7 @@ struct LoginView: View {
 
 #Preview("LoginView") {
     LoginView(
-        viewModel: .init(
-            deps: .init(
-                loginClient: .preview,
-                authClient: .preview
-            )
-        )
+        viewModel: .init()
     )
     .environmentObject(AuthRouter())
 }

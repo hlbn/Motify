@@ -1,30 +1,40 @@
 //
 
 import Foundation
-import FirebaseAuth
+import Dependencies
 
 
-public struct AuthClient {
-    public var login: (_ username: String, _ password: String) async throws -> Void
-    public var register: (_ username: String, _ password: String) async throws -> Void
-    public var logout: () throws -> Void
-    public var getCurrentUser: () -> User?
+public struct AuthClient: Sendable {
+    public var login: @Sendable (_ username: String, _ password: String) async throws -> Void
+    public var register: @Sendable (_ username: String, _ password: String) async throws -> Void
+    public var logout: @Sendable () throws -> Void
+    public var getCurrentUserId: @Sendable () -> String?
+    
+    public init(
+        login: @Sendable @escaping (_: String, _: String) async throws -> Void,
+        register: @Sendable @escaping (_: String, _: String) async throws -> Void,
+        logout: @Sendable @escaping () throws -> Void,
+        getCurrentUserId: @Sendable @escaping () -> String?
+    ) {
+        self.login = login
+        self.register = register
+        self.logout = logout
+        self.getCurrentUserId = getCurrentUserId
+    }
 }
 
 
 // MARK: - Preview
 
-public extension AuthClient {
+extension AuthClient: TestDependencyKey {
     
-    static var preview: Self {
-        .init { _, _ in
-            // do nothing
-        } register: { _, _ in
-            // do nothing
-        } logout: {
-            // do nothing
-        } getCurrentUser: {
-            nil
-        }
+    public static var previewValue: AuthClient { testValue }
+    public static var testValue: AuthClient {
+        AuthClient(
+            login: { _, _ in },
+            register: { _, _ in },
+            logout: { },
+            getCurrentUserId: { nil }
+        )
     }
 }

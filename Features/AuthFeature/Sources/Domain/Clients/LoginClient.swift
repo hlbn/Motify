@@ -1,5 +1,6 @@
 //
 
+import Dependencies
 import UtilityKit
 
 
@@ -11,14 +12,13 @@ struct LoginClient: Sendable {
 
 // MARK: - Preview
 
-extension LoginClient {
+extension LoginClient: TestDependencyKey {
     
-    static var preview: Self {
-        .init(
+    public static var previewValue: LoginClient { testValue }
+    public static var testValue: LoginClient {
+        LoginClient(
             savedCredentials: .constant(nil),
-            purgeCredentialsIfNeeded: {
-                // do nothing
-            }
+            purgeCredentialsIfNeeded: { }
         )
     }
 }

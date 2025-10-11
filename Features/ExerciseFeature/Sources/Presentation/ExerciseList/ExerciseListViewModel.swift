@@ -4,6 +4,7 @@ import DesignKit
 import FirebaseKit
 import Foundation
 import NavigationKit
+import Dependencies
 import UtilityKit
 
 
@@ -11,7 +12,6 @@ struct ExerciseListViewState {
     
     // MARK: - Properties
     
-    fileprivate var exercises = [ExerciseEntity]()
     var exerciseVOs = [ExerciseVO]()
     
     var isInErrorState = false
@@ -28,11 +28,6 @@ struct ExerciseListViewState {
 @MainActor
 final class ExerciseListViewModel: ObservableObject {
     
-    struct Dependencies {
-        var exerciseClient: ExerciseClient
-    }
-    
-    
     // MARK: - State
 
     @Published var state = ExerciseListViewState()
@@ -40,16 +35,7 @@ final class ExerciseListViewModel: ObservableObject {
 
     // MARK: - Services
 
-    private let deps: Dependencies
-
-
-    // MARK: - Init
-
-    init(
-        deps: Dependencies
-    ) {
-        self.deps = deps
-    }
+    @Dependency(ExerciseClient.self) private var exerciseClient
     
     
     // MARK: - Actions
@@ -58,11 +44,10 @@ final class ExerciseListViewModel: ObservableObject {
         state.isLoading = true
         
         do {
-            let exercises = try await deps.exerciseClient.fetchExercises()
+            let exercises = try await exerciseClient.fetchExercises()
             
             state.isInErrorState = false
-            state.exercises = exercises
-            state.exerciseVOs = ExerciseVOMapper.map(exercises)
+            state.exerciseVOs = exercises
         } catch {
             state.isInErrorState = true
         }
@@ -71,11 +56,7 @@ final class ExerciseListViewModel: ObservableObject {
     }
     
     func onWorkoutTap(exercise: ExerciseVO, router: ExerciseRouter) {
-        guard let exerciseEntity = state.exercises.first(where: { $0.id == exercise.id }) else {
-            return
-        }
-        
-        router.showExerciseDetail(exercise: exerciseEntity)
+        router.showExerciseDetail(exercise: exercise)
     }
     
     func onCreateTap(router: ExerciseRouter) {

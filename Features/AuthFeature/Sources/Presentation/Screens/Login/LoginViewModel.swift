@@ -6,6 +6,7 @@ import Foundation
 import NavigationKit
 import OSLog
 import UIKit
+import Dependencies
 import UtilityKit
 
 
@@ -32,12 +33,6 @@ struct LoginViewState {
 @MainActor
 final class LoginViewModel: ObservableObject {
     
-    struct Dependencies {
-        let loginClient: LoginClient
-        let authClient: AuthClient
-    }
-    
-    
     // MARK: - State
 
     @Published var state = LoginViewState()
@@ -45,14 +40,13 @@ final class LoginViewModel: ObservableObject {
 
     // MARK: - Services
 
-    private let deps: Dependencies
+    @Dependency(LoginClient.self) private var loginClient
+    @Dependency(AuthClient.self) private var authClient
     
     
     // MARK: - Init
 
-    init(deps: Dependencies) {
-        self.deps = deps
-        
+    init() {
         setupInitial()
     }
     
@@ -80,8 +74,8 @@ final class LoginViewModel: ObservableObject {
 private extension LoginViewModel {
     
     func setupInitial() {
-        deps.loginClient.purgeCredentialsIfNeeded()
-        state.email = deps.loginClient.savedCredentials?.username ?? .empty
+        loginClient.purgeCredentialsIfNeeded()
+        state.email = loginClient.savedCredentials?.username ?? .empty
     }
     
     func performLogin(router: AuthRouter, username: String, password: String) async {
@@ -90,9 +84,9 @@ private extension LoginViewModel {
         state.isLoading = true
         
         do {
-            try await deps.authClient.login(username, password)
+            try await authClient.login(username, password)
             
-            deps.loginClient.savedCredentials = .init(username: username, password: password)
+            loginClient.savedCredentials = .init(username: username, password: password)
             
             state.password = .empty
             

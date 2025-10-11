@@ -11,11 +11,13 @@ let package = Package(
     products: [
         .singleTargetLibrary("DesignKit"),
         .singleTargetLibrary("FirebaseKit"),
+        .singleTargetLibrary("FirebaseKitLive"),
         .singleTargetLibrary("NavigationKit"),
         .singleTargetLibrary("UtilityKit")
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.4.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.4.0"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", exact: "1.10.0")
     ],
     targets: [
         .projectTarget(
@@ -27,7 +29,12 @@ let package = Package(
         ),
         .projectTarget(
             name: "FirebaseKit",
+            dependencies: ["UtilityKit"]
+        ),
+        .projectTarget(
+            name: "FirebaseKitLive",
             dependencies: [
+                "FirebaseKit",
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
@@ -45,6 +52,7 @@ let package = Package(
         .projectTarget(
             name: "UtilityKit",
             dependencies: [
+                .product(name: "Dependencies", package: "swift-dependencies")
             ],
             resources: [.process("Resources")]
         )
