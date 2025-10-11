@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4B16B862E9AA87A00DBD4F7 /* ExerciseFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */; };
 		A4B86CF12E8C56A5008F052D /* AuthFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A4B86CF02E8C56A5008F052D /* AuthFeature */; };
 		A4C73D8B2E8448B300E85E87 /* DesignKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8A2E8448B300E85E87 /* DesignKit */; };
 		A4C73D8D2E8448B300E85E87 /* FirebaseKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8C2E8448B300E85E87 /* FirebaseKit */; };
@@ -34,6 +35,7 @@
 				A4C73D8D2E8448B300E85E87 /* FirebaseKit in Frameworks */,
 				A4B86CF12E8C56A5008F052D /* AuthFeature in Frameworks */,
 				A4C73D8B2E8448B300E85E87 /* DesignKit in Frameworks */,
+				A4B16B862E9AA87A00DBD4F7 /* ExerciseFeature in Frameworks */,
 				A4C73D912E8448B300E85E87 /* UtilityKit in Frameworks */,
 				A4C73D8F2E8448B300E85E87 /* NavigationKit in Frameworks */,
 			);
@@ -92,6 +94,7 @@
 				A4C73D8E2E8448B300E85E87 /* NavigationKit */,
 				A4C73D902E8448B300E85E87 /* UtilityKit */,
 				A4B86CF02E8C56A5008F052D /* AuthFeature */,
+				A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */,
 			);
 			productName = Motify;
 			productReference = A4BBB1232E82FE6E00E1F4C7 /* Motify.app */;
@@ -214,6 +217,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -233,6 +237,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -290,6 +295,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -321,6 +327,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hlbn.Motify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -359,6 +366,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hlbn.Motify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -396,6 +404,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ExerciseFeature;
+		};
 		A4B86CF02E8C56A5008F052D /* AuthFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthFeature;

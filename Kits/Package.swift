@@ -15,7 +15,7 @@ let package = Package(
         .singleTargetLibrary("UtilityKit")
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.3.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.4.0")
     ],
     targets: [
         .projectTarget(

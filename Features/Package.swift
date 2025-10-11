@@ -9,7 +9,8 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [.iOS(.v17)],
     products: [
-        .singleTargetLibrary("AuthFeature")
+        .singleTargetLibrary("AuthFeature"),
+        .singleTargetLibrary("ExerciseFeature")
     ],
     dependencies: [
         .package(path: "../Kits"),
@@ -24,6 +25,15 @@ let package = Package(
                 .kit("NavigationKit"),
                 .kit("UtilityKit"),
                 .product(name: "KeychainSwift", package: "keychain-swift")
+            ]
+        ),
+        .projectTarget(
+            name: "ExerciseFeature",
+            dependencies: [
+                .kit("DesignKit"),
+                .kit("FirebaseKit"),
+                .kit("NavigationKit"),
+                .kit("UtilityKit")
             ]
         )
     ]

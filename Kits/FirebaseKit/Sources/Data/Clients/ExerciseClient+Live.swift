@@ -10,7 +10,6 @@ public extension ExerciseClient {
         
         return .init(
             fetchExercises: exerciseService.fetchExercises,
-            addExercise: exerciseService.addExercise,
             saveExercise: exerciseService.saveExercise,
             deleteExercise: exerciseService.deleteExercise
         )

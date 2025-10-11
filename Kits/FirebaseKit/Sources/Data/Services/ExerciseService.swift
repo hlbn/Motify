@@ -32,39 +32,27 @@ final class ExerciseService {
         return try await exercisesRef.getDocuments(as: ExerciseEntity.self)
     }
     
-    func addExercise(workout: ExerciseEntity) throws {
-        guard let userId = authClient.getCurrentUser()?.uid else {
-            throw DataError.failed("addExercise -> Missing user id")
-        }
-        
-        let exercisesRef = firestore.collection("users").document(userId).collection("exercises").document()
-        
-        try exercisesRef.setData(from: workout)
-    }
-    
-    func saveExercise(workout: ExerciseEntity, workoutId: String) async throws {
+    func saveExercise(workout: ExerciseEntity, workoutId: String?) throws {
         guard let userId = authClient.getCurrentUser()?.uid else {
             throw DataError.failed("saveExercise -> Missing user id")
         }
         
-        let batch = firestore.batch()
-        let exercisesRef = firestore.collection("users").document(userId).collection("exercises").document(workoutId)
+        let exercisesRef = if let workoutId {
+            firestore.collection("users").document(userId).collection("exercises").document(workoutId)
+        } else {
+            firestore.collection("users").document(userId).collection("exercises").document()
+        }
         
-        try batch.setData(from: workout, forDocument: exercisesRef)
-        
-        try await batch.commit()
+        try exercisesRef.setData(from: workout)
     }
     
-    func deleteExercise(workoutId: String, shouldDeletePublished: Bool) async throws {
+    func deleteExercise(workoutId: String) throws {
         guard let userId = authClient.getCurrentUser()?.uid else {
             throw DataError.failed("deleteExercise -> Missing user id")
         }
         
-        let batch = firestore.batch()
         let exercisesRef = firestore.collection("users").document(userId).collection("exercises").document(workoutId)
         
-        batch.deleteDocument(exercisesRef)
-        
-        try await batch.commit()
+        exercisesRef.delete()
     }
 }

@@ -1,10 +1,15 @@
 //
 
-
 import SwiftUI
+import NavigationKit
 
 
 struct MainView: View {
+    
+    // MARK: - Properties
+    
+    @StateObject private var exerciseRouter = ExerciseRouter()
+    
     
     // MARK: - Body
     
@@ -16,6 +21,7 @@ struct MainView: View {
             Text("Hello, world!")
         }
         .padding()
+        .environmentObject(exerciseRouter)
     }
 }
 
