@@ -31,6 +31,7 @@ let package = Package(
             name: "FirebaseKit",
             dependencies: ["UtilityKit"]
         ),
+        // by making isolated firebase live kit we managed to fix Firebase linking issues in previews
         .projectTarget(
             name: "FirebaseKitLive",
             dependencies: [
