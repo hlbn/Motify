@@ -48,28 +48,36 @@ struct ExerciseView: View {
                             .multilineTextAlignment(.trailing)
                     }
                     
-                    ThemedDivider()
-                    
-                    Picker("exercise.duration".localized.translation, selection: $viewModel.state.exerciseVO.durationMinutes) {
-                        ForEach(ExerciseVO.DurationMinutes.allCases, id: \.self) { minutes in
-                            Text("\(minutes.rawValue) \("minutes".localized.translation)")
-                                .tag(minutes)
+                    VStack(spacing: 16) {
+                        ThemedDivider()
+                        
+                        HStack {
+                            Text("exercise.duration".localized.translation)
+                                .font(.caption, color: .contentMain)
+                            
+                            Spacer()
+                            
+                            Picker("exercise.duration".localized.translation, selection: $viewModel.state.exerciseVO.durationMinutes) {
+                                ForEach(ExerciseVO.DurationMinutes.allCases, id: \.self) { minutes in
+                                    Text("\(minutes.rawValue) \("minutes".localized.translation)")
+                                        .tag(minutes)
+                                }
+                            }
                         }
+                        .pickerStyle(.menu)
+                        
+                        ThemedDivider()
                     }
-                    .pickerStyle(.navigationLink)
-                    .font(.caption, color: .contentMain)
-                    
-                    ThemedDivider()
                     
                     Button(action: viewModel.onMapPickerTap) {
                         HStack {
-                            Text("exercise.location")
+                            Text("exercise.location".localized.translation)
                                 .font(.caption, color: .contentMain)
                             
                             Spacer()
                             
                             Text(viewModel.state.exerciseVO.locationName ?? "exercise.location.empty")
-                                .font(.caption, color: .contentMain)
+                                .font(.caption2, color: viewModel.state.exerciseVO.locationName == nil ? .hintGray : .contentMain)
                         }
                     }
                     
@@ -82,7 +90,7 @@ struct ExerciseView: View {
                     .font(.caption, color: .contentMain)
 
                 }
-                .padding(.horizontal, 24)
+                .padding(top: 12, leading: 24, bottom: 12, trailing: 24)
             }
             .disabled(viewModel.state.isShowingMapPicker)
             .mapItemPicker(isPresented: $viewModel.state.isShowingMapPicker) { item in

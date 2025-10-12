@@ -18,4 +18,5 @@ public extension Color {
     static let underline = Color(.underline)
     static let darkShadow = Color(.darkShadow)
     static let backgroundMain = Color(.backgroundMain)
+    static let hintGray = Color(.hintGray)
 }
