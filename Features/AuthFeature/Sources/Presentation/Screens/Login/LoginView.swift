@@ -67,7 +67,7 @@ struct LoginView: View {
                 .frame(minHeight: proxy.size.height)
             }
         }
-        .background(Color.white)
+        .background(Color.backgroundMain)
         .navigationBarHidden(true)
         .alert($viewModel.state.alert)
         .loading(viewModel.state.isLoading)

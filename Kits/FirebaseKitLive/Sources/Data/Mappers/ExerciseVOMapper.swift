@@ -1,7 +1,7 @@
 //
 
 import Foundation
-import FirebaseKit
+import DesignKit
 
 
 enum ExerciseVOMapper {
@@ -19,7 +19,8 @@ enum ExerciseVOMapper {
             id: entityId,
             title: entity.title,
             description: entity.description,
-            durationMinutes: entity.durationMinutes
+            durationMinutes: entity.durationMinutes,
+            storageType: .remote
         )
     }
 }

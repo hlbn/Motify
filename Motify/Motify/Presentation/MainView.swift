@@ -1,7 +1,10 @@
 //
 
+import DesignKit
 import SwiftUI
 import NavigationKit
+import ExerciseFeature
+import UtilityKit
 
 
 struct MainView: View {
@@ -14,14 +17,29 @@ struct MainView: View {
     // MARK: - Body
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            Group {
+                NavigationStack(path: $exerciseRouter.path) {
+                    ExerciseFeatureFactory.createExerciseListView()
+                        .navigationDestination(for: ExercisePath.self) { path in
+                            switch path {
+                            case .exercise(let exercise):
+                                ExerciseFeatureFactory.createExerciseView(exercise: exercise)
+                            case .exerciseDetail:
+                                EmptyView()
+                            }
+                        }
+                }
+                .tabItem {
+                    Label("tab.dashboard".localized.translation, systemImage: "figure.run")
+                }
+                .environmentObject(exerciseRouter)
+                
+            }
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarBackground(Color.mainBlue, for: .tabBar)
         }
-        .padding()
-        .environmentObject(exerciseRouter)
+        .tint(Color.mainBlue)
     }
 }
 

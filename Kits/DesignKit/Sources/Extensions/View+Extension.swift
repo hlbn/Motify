@@ -78,6 +78,25 @@ public extension View {
 }
 
 
+// MARK: - Shadow
+
+public extension View {
+    
+    /// Aplies specified shadow to the view
+    ///
+    /// - Returns: A view with a shadow
+    func tileShadow(
+        color: Color = Color.darkShadow,
+        radius: CGFloat = 10,
+        x: CGFloat = 0,
+        y: CGFloat = 4
+    ) -> some View {
+        self
+            .shadow(color: color, radius: radius, x: x, y: y)
+    }
+}
+
+
 // MARK: - Preview helpers
 
 public extension View {
@@ -87,11 +106,11 @@ public extension View {
             self
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.white)
+                .background(Color.backgroundMain)
             self
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.black.opacity(0.8))
+                .background(Color.backgroundMain)
                 .environment(\.colorScheme, .dark)
         }
     }

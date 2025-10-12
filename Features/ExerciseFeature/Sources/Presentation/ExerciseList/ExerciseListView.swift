@@ -24,20 +24,26 @@ struct ExerciseListView: View {
     
     var body: some View {
         ScrollView {
-           
+            VStack(spacing: 16) {
+                ForEach(viewModel.state.exercisesVO) { exercise in
+                    ExerciseTile(viewObject: exercise)
+                }
+            }
+            .padding(.horizontal, 16)
+            .frame(maxWidth: .infinity)
         }
-        .frame(maxWidth: .infinity)
-        .background(Color.bgMain)
+        .background(Color.backgroundMain)
         .navigationTitle("exercise.title".localized.translation)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarBackground(Color.bgMain, for: .navigationBar)
+        .toolbarBackground(Color.backgroundMain, for: .navigationBar)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     viewModel.onCreateTap(router: router)
                 } label: {
                     Image(systemName: "plus")
-                        .foregroundStyle(Color.mainGreen)
+                        .foregroundStyle(Color.mainBlue)
                         .bold()
                 }
             }

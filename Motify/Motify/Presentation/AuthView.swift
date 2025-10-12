@@ -29,6 +29,7 @@ struct AuthView: View {
         .fullScreenCover(isPresented: $authRouter.isLoggedIn) {
             MainView()
         }
+        .tint(Color.mainBlue)
         .environmentObject(authRouter)
     }
 }

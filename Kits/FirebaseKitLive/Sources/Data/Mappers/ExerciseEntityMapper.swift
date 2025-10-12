@@ -1,7 +1,7 @@
 //
 
 import Foundation
-import FirebaseKit
+import DesignKit
 
 
 enum ExerciseEntityMapper {

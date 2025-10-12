@@ -12,7 +12,7 @@ struct ExerciseListViewState {
     
     // MARK: - Properties
     
-    var exerciseVOs = [ExerciseVO]()
+    var exercisesVO = [ExerciseVO]()
     
     var isInErrorState = false
     var isLoading = false
@@ -21,9 +21,10 @@ struct ExerciseListViewState {
     // MARK: - Computed properties
     
     var showEmptyPlaceholder: Bool {
-        exerciseVOs.isEmpty && !isLoading
+        exercisesVO.isEmpty && !isLoading
     }
 }
+
 
 @MainActor
 final class ExerciseListViewModel: ObservableObject {
@@ -47,7 +48,7 @@ final class ExerciseListViewModel: ObservableObject {
             let exercises = try await exerciseClient.fetchExercises()
             
             state.isInErrorState = false
-            state.exerciseVOs = exercises
+            state.exercisesVO = exercises
         } catch {
             state.isInErrorState = true
         }

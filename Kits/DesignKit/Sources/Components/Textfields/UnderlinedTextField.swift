@@ -33,7 +33,7 @@ public struct UnderlinedTextField: View {
             return .mainRed
         }
         
-        return isFocused ? .mainGreen : .content75
+        return isFocused ? .mainBlue : .content75
     }
 
     private var underlineColor: Color {
@@ -41,7 +41,7 @@ public struct UnderlinedTextField: View {
             return .mainRed
         }
         
-        return isFocused ? .mainGreen : .underline
+        return isFocused ? .mainBlue : .underline
     }
     
 

@@ -40,6 +40,7 @@ struct ExerciseViewState {
     }
 }
 
+
 @MainActor
 final class ExerciseViewModel: ObservableObject {
     
