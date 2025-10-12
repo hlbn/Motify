@@ -29,11 +29,11 @@ struct ExerciseListView: View {
                     ExerciseTile(viewObject: exercise)
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(16)
             .frame(maxWidth: .infinity)
         }
         .background(Color.backgroundMain)
-        .navigationTitle("exercise.title".localized.translation)
+        .navigationTitle("exercise.list.nav.title".localized.translation)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(Color.backgroundMain, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)

@@ -36,8 +36,6 @@ struct MainView: View {
                 .environmentObject(exerciseRouter)
                 
             }
-            .toolbarBackground(.visible, for: .tabBar)
-            .toolbarBackground(Color.mainBlue, for: .tabBar)
         }
         .tint(Color.mainBlue)
     }

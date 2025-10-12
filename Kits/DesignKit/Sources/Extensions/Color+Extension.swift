@@ -13,6 +13,7 @@ public extension Color {
     static let content50 = Color(.content50)
     static let mainGreen = Color(.mainGreen)
     static let mainBlue = Color(.mainBlue)
+    static let secondaryBlue = Color(.secondaryBlue)
     static let mainRed = Color(.mainRed)
     static let underline = Color(.underline)
     static let darkShadow = Color(.darkShadow)

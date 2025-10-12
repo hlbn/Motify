@@ -1,5 +1,5 @@
 {
-  "originHash" : "0ead0a2d61b144970defddde8266c20ad7b4e2b4fb873bd32dc580be15df2621",
+  "originHash" : "67f3f5f6d62b9d29177b06b7db570c3138999c06f6c4e2b8ea1d8b262fd4f2c9",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -179,6 +179,15 @@
       "state" : {
         "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
         "version" : "601.0.1"
+      }
+    },
+    {
+      "identity" : "swiftui-map-item-picker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-map-item-picker.git",
+      "state" : {
+        "revision" : "48e0bdbcecc901b0cfd6962f0b42225136789c07",
+        "version" : "2.0.0"
       }
     },
     {

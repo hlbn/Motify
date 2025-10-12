@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,14 +7,15 @@ import PackageDescription
 let package = Package(
     name: "Features",
     defaultLocalization: "en",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS(.v18)],
     products: [
         .singleTargetLibrary("AuthFeature"),
         .singleTargetLibrary("ExerciseFeature")
     ],
     dependencies: [
         .package(path: "../Kits"),
-        .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0")
+        .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0"),
+        .package(url: "https://github.com/lorenzofiamingo/swiftui-map-item-picker.git", exact: "2.0.0")
     ],
     targets: [
         .projectTarget(
@@ -30,6 +31,7 @@ let package = Package(
         .projectTarget(
             name: "ExerciseFeature",
             dependencies: [
+                .product(name: "MapItemPicker", package: "swiftui-map-item-picker"),
                 .kit("DesignKit"),
                 .kit("FirebaseKit"),
                 .kit("NavigationKit"),

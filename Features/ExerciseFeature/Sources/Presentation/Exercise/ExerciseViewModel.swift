@@ -8,6 +8,7 @@ import OSLog
 import SwiftUI
 import UIKit
 import Dependencies
+import MapKit
 import UtilityKit
 
 
@@ -26,6 +27,9 @@ struct ExerciseViewState {
     var exerciseVO: ExerciseVO
     var displayMode: DisplayMode
     var isCreating = false
+    var isShowingMapPicker = false
+    var isShowingTypePicker = false
+    var isSavedOnCloud = false
     
     var alert: AlertVO?
     var isLoading = false
@@ -64,7 +68,7 @@ final class ExerciseViewModel: ObservableObject {
 
     init(input: Input) {
         if let exerciseVO = input.exerciseVO {
-            self.state = .init(exerciseVO: exerciseVO, displayMode: .edit)
+            self.state = .init(exerciseVO: exerciseVO, displayMode: .edit, isSavedOnCloud: exerciseVO.storageType == .remote)
         } else {
             self.state = .init(exerciseVO: .empty, displayMode: .add, isCreating: true, didEdit: true)
         }
@@ -75,6 +79,28 @@ final class ExerciseViewModel: ObservableObject {
     
     func onSaveTap(dismiss: DismissAction) {
         performSaveIfPossible(dismiss: dismiss)
+    }
+    
+    func onTypePickerTap() {
+        state.isShowingTypePicker = true
+    }
+    
+    func onTypePicked(type: ExerciseVO.Exercise) {
+        state.exerciseVO.exercise = type
+        state.isShowingTypePicker = false
+    }
+    
+    func onMapPickerTap() {
+        state.isShowingMapPicker = true
+    }
+    
+    func onMapItemPicked(mapItem: MKMapItem?) {
+        guard let mapItem else {
+            return
+        }
+        
+        state.exerciseVO.locationName = mapItem.name
+        state.isShowingMapPicker = false
     }
     
     func onBackTap(dismiss: DismissAction) {
@@ -103,8 +129,8 @@ private extension ExerciseViewModel {
     func performSaveIfPossible(dismiss: DismissAction) {
         let exercise = state.exerciseVO
         let errors: [String] = [
-            exercise.durationMinutes > 0 ? nil : "exercise.error.zerolength",
-            exercise.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "exercise.error.titlerequired" : nil,
+            exercise.durationMinutes.rawValue > 0 ? nil : "exercise.error.zerolength",
+            exercise.exercise == .none ? "exercise.error.titlerequired" : nil,
             exercise.description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "exercise.error.descriptionrequired" : nil
         ]
         .compactMap { $0 }
@@ -128,6 +154,7 @@ private extension ExerciseViewModel {
         
         do {
             try exerciseClient.saveExercise(state.exerciseVO, state.exerciseVO.id)
+            dismiss()
         } catch {
             state.alert = .init(
                 title: "exercise.save.server.error".localized,

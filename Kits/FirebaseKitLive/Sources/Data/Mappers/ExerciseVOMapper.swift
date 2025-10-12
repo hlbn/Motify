@@ -17,10 +17,11 @@ enum ExerciseVOMapper {
         
         return .init(
             id: entityId,
-            title: entity.title,
+            exercise: .init(rawValue: entity.title) ?? .none,
             description: entity.description,
-            durationMinutes: entity.durationMinutes,
-            storageType: .remote
+            durationMinutes: .init(rawValue: entity.durationMinutes) ?? .none,
+            storageType: .remote,
+            locationName: entity.locationName
         )
     }
 }

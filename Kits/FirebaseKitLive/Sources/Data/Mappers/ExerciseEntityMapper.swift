@@ -8,9 +8,10 @@ enum ExerciseEntityMapper {
     
     static func map(_ exercise: ExerciseVO) -> ExerciseEntity {
         ExerciseEntity(
-            title: exercise.title.trimmingCharacters(in: .whitespacesAndNewlines),
+            title: exercise.exercise.rawValue,
             description: exercise.description.trimmingCharacters(in: .whitespacesAndNewlines),
-            durationMinutes: exercise.durationMinutes
+            durationMinutes: exercise.durationMinutes.rawValue,
+            locationName: exercise.locationName ?? ""
         )
     }
 }

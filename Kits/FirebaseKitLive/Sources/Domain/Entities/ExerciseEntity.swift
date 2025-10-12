@@ -13,6 +13,7 @@ public struct ExerciseEntity: Codable, Hashable {
     public let title: String
     public let description: String
     public let durationMinutes: Int
+    public var locationName: String?
     
     
     // MARK: - Init
@@ -21,12 +22,14 @@ public struct ExerciseEntity: Codable, Hashable {
         id: String? = nil,
         title: String,
         description: String,
-        durationMinutes: Int
+        durationMinutes: Int,
+        locationName: String
     ) {
         self.id = id
         self.title = title
         self.description = description
         self.durationMinutes = durationMinutes
+        self.locationName = locationName
     }
 }
 
@@ -41,13 +44,15 @@ public extension [ExerciseEntity] {
                 id: UUID().uuidString,
                 title: "Exercise preview",
                 description: "Preview description",
-                durationMinutes: 60
+                durationMinutes: 60,
+                locationName: "Americká"
             ),
             .init(
                 id: UUID().uuidString,
                 title: "Exercise preview 2",
                 description: "Preview description",
-                durationMinutes: 30
+                durationMinutes: 30,
+                locationName: "Americká"
             )
         ]
     }
@@ -61,7 +66,8 @@ public extension ExerciseEntity {
             id: UUID().uuidString,
             title: "Exercise preview",
             description: "Preview description",
-            durationMinutes: 60
+            durationMinutes: 60,
+            locationName: "Americká"
         )
     }
 }

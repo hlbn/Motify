@@ -13,8 +13,51 @@ public struct ExerciseTile: View {
     // MARK: - Body
     
     public var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 8) {
+                    viewObject.exercise.icon
+                        .resizable()
+                        .frame(width: 32, height: 32)
+                        .bold()
+                        .foregroundStyle(Color.white)
+
+                    
+                    Text(viewObject.exercise.rawValue.localized.translation)
+                        .font(.title3)
+                        .bold()
+                        .foregroundColor(.white)
+                }
+                
+                if let locationName = viewObject.locationName {
+                    HStack(spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundStyle(Color.white)
+                        
+                        Text(locationName)
+                            .font(.caption)
+                            .foregroundColor(.white)
+                    }
+                }
+                
+                HStack(spacing: 4) {
+                    Image(systemName: "stopwatch")
+                        .foregroundStyle(Color.white)
+                    
+                    Text("\(viewObject.durationMinutes.rawValue) \("minutes".localized.translation)")
+                        .font(.footnote)
+                        .bold()
+                        .foregroundColor(.white)
+                }
+                
+                Text(viewObject.description)
+                    .font(.caption)
+                    .foregroundColor(.white)
+            }
+            
+            Spacer()
+            
+            VStack(spacing: 4) {
                 switch viewObject.storageType {
                 case .local:
                     Image(systemName: "icloud.slash.fill")
@@ -24,27 +67,15 @@ public struct ExerciseTile: View {
                         .foregroundStyle(Color.mainGreen)
                 }
                 
-                Text(viewObject.title)
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(.white)
+                Spacer()
                 
-                Text(viewObject.description)
-                    .font(.caption)
+                Image(systemName: "pencil")
                     .foregroundColor(.white)
-                
-                Text("\(viewObject.durationMinutes) \("minutes".localized.translation)")
-                    .font(.footnote)
                     .bold()
-                    .foregroundColor(.white)
-                    .padding(.top, 4)
+                    .padding(.bottom, 8)
+                
+                Spacer()
             }
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundColor(.white)
-                .bold()
         }
         .padding(16)
         .background(Color.mainBlue)
