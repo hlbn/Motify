@@ -10,7 +10,7 @@ enum ExerciseEntityMapper {
         ExerciseEntity(
             title: exercise.exercise.rawValue,
             description: exercise.description.trimmingCharacters(in: .whitespacesAndNewlines),
-            durationMinutes: exercise.durationMinutes.rawValue,
+            durationMinutes: exercise.durationMinutes,
             locationName: exercise.locationName ?? ""
         )
     }

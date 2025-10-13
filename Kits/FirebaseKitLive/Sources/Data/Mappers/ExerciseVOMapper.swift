@@ -19,7 +19,7 @@ enum ExerciseVOMapper {
             id: entityId,
             exercise: .init(rawValue: entity.title) ?? .none,
             description: entity.description,
-            durationMinutes: .init(rawValue: entity.durationMinutes) ?? .none,
+            durationMinutes: entity.durationMinutes,
             storageType: .remote,
             locationName: entity.locationName
         )

@@ -5,6 +5,7 @@ import FirebaseKit
 import Foundation
 import NavigationKit
 import Dependencies
+import OSLog
 import UtilityKit
 
 
@@ -51,6 +52,7 @@ final class ExerciseListViewModel: ObservableObject {
             state.exercisesVO = exercises
         } catch {
             state.isInErrorState = true
+            Logger.main.error("Failed to load exercises")
         }
         
         state.isLoading = false
@@ -62,5 +64,18 @@ final class ExerciseListViewModel: ObservableObject {
     
     func onCreateTap(router: ExerciseRouter) {
         router.showExerciseCreate()
+    }
+    
+    func onExerciseDelete(offset: IndexSet) {
+        guard let offset = offset.first, let exerciseId = state.exercisesVO[offset].id else {
+            return
+        }
+        
+        do {
+            try exerciseClient.deleteExercise(exerciseId)
+            state.exercisesVO.removeAll { $0.id == exerciseId }
+        } catch {
+            Logger.main.error("Failed to delete exercise")
+        }
     }
 }

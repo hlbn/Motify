@@ -23,7 +23,7 @@ public struct ExerciseTypeTile: View {
                     .bold()
                     .symbolEffect(.bounce, options: .nonRepeating, value: exercise.icon)
                 
-                Text(exercise.rawValue.localized.translation)
+                Text(exercise.localized.translation)
                     .font(.title3)
                     .bold()
                     .foregroundColor(.white)

@@ -26,7 +26,7 @@ struct ExerciseTypePickerView: View {
                             .foregroundColor(Color.content50)
                             .bold()
                         
-                        Text(type.rawValue.localized.translation)
+                        Text(type.localized.translation)
                             .font(.caption, color: .contentMain)
                         
                         Spacer()

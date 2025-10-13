@@ -23,7 +23,7 @@ public struct ExerciseTile: View {
                         .foregroundStyle(Color.white)
 
                     
-                    Text(viewObject.exercise.rawValue.localized.translation)
+                    Text(viewObject.exercise.localized.translation)
                         .font(.title3)
                         .bold()
                         .foregroundColor(.white)
@@ -44,7 +44,7 @@ public struct ExerciseTile: View {
                     Image(systemName: "stopwatch")
                         .foregroundStyle(Color.white)
                     
-                    Text("\(viewObject.durationMinutes.rawValue) \("minutes".localized.translation)")
+                    Text("\(viewObject.durationMinutes) \("minutes".localized.translation)")
                         .font(.footnote)
                         .bold()
                         .foregroundColor(.white)

@@ -28,6 +28,9 @@ struct ExerciseListView: View {
                 ForEach(viewModel.state.exercisesVO) { exercise in
                     ExerciseTile(viewObject: exercise)
                 }
+                .onDelete { offset in
+                    viewModel.onExerciseDelete(offset: offset)
+                }
             }
             .padding(16)
             .frame(maxWidth: .infinity)

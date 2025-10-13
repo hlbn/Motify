@@ -42,6 +42,16 @@ struct ExerciseViewState {
     var isEditing: Bool {
         displayMode == .edit
     }
+    
+    var minutesPickerData: [Int] {
+        var data = [Int]()
+        
+        for index in 0...48 {
+            data.append(index * 5)
+        }
+        
+        return data
+    }
 }
 
 
@@ -129,7 +139,7 @@ private extension ExerciseViewModel {
     func performSaveIfPossible(dismiss: DismissAction) {
         let exercise = state.exerciseVO
         let errors: [String] = [
-            exercise.durationMinutes.rawValue > 0 ? nil : "exercise.error.zerolength",
+            exercise.durationMinutes > 0 ? nil : "exercise.error.zerolength",
             exercise.exercise == .none ? "exercise.error.titlerequired" : nil,
             exercise.description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "exercise.error.descriptionrequired" : nil
         ]

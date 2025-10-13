@@ -13,13 +13,32 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
     }
     
     public enum Exercise: String, CaseIterable {
-        case weightlift = "exercise.weightlift"
-        case run = "exercise.run"
-        case walk = "exercise.walk"
-        case pilates = "exercise.pilates"
-        case yoga = "exercise.yoga"
-        case box = "exercise.box"
+        case weightlift
+        case run
+        case walk
+        case pilates
+        case yoga
+        case box
         case none
+        
+        public var localized: Localization {
+            switch self {
+            case .weightlift:
+                "exercise.weightlift".localized
+            case .run:
+                "exercise.run".localized
+            case .walk:
+                "exercise.walk".localized
+            case .pilates:
+                "exercise.pilates".localized
+            case .yoga:
+                "exercise.yoga".localized
+            case .box:
+                "exercise.box".localized
+            case .none:
+                "exercise.none".localized
+            }
+        }
         
         public var icon: Image {
             switch self {
@@ -41,41 +60,13 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
         }
     }
     
-    public enum DurationMinutes: Int, CaseIterable {
-        case none = 0
-        case five = 5
-        case ten = 10
-        case fifteen = 15
-        case twenty = 20
-        case twentyFive = 25
-        case thirty = 30
-        case thirtyFive = 35
-        case forty = 40
-        case fortyFive = 45
-        case fifty = 50
-        case fiftyFive = 55
-        case sixty = 60
-        case sixtyFive = 65
-        case seventy = 70
-        case seventyFive = 75
-        case eighty = 80
-        case eightyFive = 85
-        case ninety = 90
-        case ninetyFive = 95
-        case oneHundred = 100
-        case oneHundredFive = 105
-        case oneHundredTen = 110
-        case oneHundredFifteen = 115
-        case oneHundredTwenty = 120
-    }
-    
     
     // MARK: - Properties
     
     public let id: String?
     public var exercise: Exercise
     public var description: String
-    public var durationMinutes: DurationMinutes
+    public var durationMinutes: Int
     public var storageType: StorageType
     public var locationName: String?
     
@@ -86,7 +77,7 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
         id: String?,
         exercise: Exercise,
         description: String,
-        durationMinutes: DurationMinutes,
+        durationMinutes: Int,
         storageType: StorageType,
         locationName: String?
     ) {
@@ -109,7 +100,7 @@ public extension ExerciseVO {
             id: nil,
             exercise: .none,
             description: "",
-            durationMinutes: .none,
+            durationMinutes: 0,
             storageType: .local,
             locationName: nil
         )
@@ -127,7 +118,7 @@ public extension [ExerciseVO] {
                 id: "initial_2",
                 exercise: .walk,
                 description: "Preview description",
-                durationMinutes: .sixty,
+                durationMinutes: 0,
                 storageType: .local,
                 locationName: "Americká"
             ),
@@ -135,7 +126,7 @@ public extension [ExerciseVO] {
                 id: "initial",
                 exercise: .run,
                 description: "Preview description",
-                durationMinutes: .thirty,
+                durationMinutes: 0,
                 storageType: .remote,
                 locationName: "Americká"
             )
@@ -150,7 +141,7 @@ public extension ExerciseVO {
             id: "initial",
             exercise: .weightlift,
             description: "Intensive chest pump workout",
-            durationMinutes: .fortyFive,
+            durationMinutes: 0,
             storageType: .remote,
             locationName: "Americká"
         )

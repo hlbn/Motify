@@ -58,8 +58,8 @@ struct ExerciseView: View {
                             Spacer()
                             
                             Picker("exercise.duration".localized.translation, selection: $viewModel.state.exerciseVO.durationMinutes) {
-                                ForEach(ExerciseVO.DurationMinutes.allCases, id: \.self) { minutes in
-                                    Text("\(minutes.rawValue) \("minutes".localized.translation)")
+                                ForEach(viewModel.state.minutesPickerData, id: \.self) { minutes in
+                                    Text("\(minutes) \("minutes".localized.translation)")
                                         .tag(minutes)
                                 }
                             }
