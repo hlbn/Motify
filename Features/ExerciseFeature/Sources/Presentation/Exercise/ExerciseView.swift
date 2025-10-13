@@ -30,6 +30,8 @@ struct ExerciseView: View {
                     ExerciseTypeTile(exercise: viewModel.state.exerciseVO.exercise) {
                         viewModel.onTypePickerTap()
                     }
+                    .opacity(viewModel.state.isEditing ? 0.5 : 1)
+                    .disabled(viewModel.state.isEditing)
                     
                     ThemedDivider()
                     
@@ -105,7 +107,7 @@ struct ExerciseView: View {
             }
         }
         .background(Color.backgroundMain)
-        .navigationTitle("exercise.nav.title".localized.translation)
+        .navigationTitle(viewModel.state.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(Color.backgroundMain, for: .navigationBar)

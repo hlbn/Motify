@@ -59,15 +59,15 @@ final class ExerciseListViewModel: ObservableObject {
     }
     
     func onWorkoutTap(exercise: ExerciseVO, router: ExerciseRouter) {
-        router.showExerciseDetail(exercise: exercise)
+        router.showExerciseEdit(exercise: exercise)
     }
     
     func onCreateTap(router: ExerciseRouter) {
         router.showExerciseCreate()
     }
     
-    func onExerciseDelete(offset: IndexSet) {
-        guard let offset = offset.first, let exerciseId = state.exercisesVO[offset].id else {
+    func onExerciseDelete(exercise: ExerciseVO) {
+        guard let exerciseId = exercise.id else {
             return
         }
         

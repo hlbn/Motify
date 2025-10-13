@@ -25,11 +25,12 @@ struct ExerciseListView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                ForEach(viewModel.state.exercisesVO) { exercise in
-                    ExerciseTile(viewObject: exercise)
-                }
-                .onDelete { offset in
-                    viewModel.onExerciseDelete(offset: offset)
+                ForEach(viewModel.state.exercisesVO, id: \.id) { exercise in
+                    ExerciseTile(viewObject: exercise) {
+                        viewModel.onWorkoutTap(exercise: exercise, router: router)
+                    } dismissAction: {
+                        viewModel.onExerciseDelete(exercise: exercise)
+                    }
                 }
             }
             .padding(16)

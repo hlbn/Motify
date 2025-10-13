@@ -26,7 +26,6 @@ struct ExerciseViewState {
     
     var exerciseVO: ExerciseVO
     var displayMode: DisplayMode
-    var isCreating = false
     var isShowingMapPicker = false
     var isShowingTypePicker = false
     var isSavedOnCloud = false
@@ -34,10 +33,17 @@ struct ExerciseViewState {
     var alert: AlertVO?
     var isLoading = false
     
-    var didEdit = false
-    
     
     // MARK: - Computed properties
+    
+    var navigationTitle: String {
+        switch displayMode {
+        case .add:
+            return "exercise.add.nav.title".localized.translation
+        case .edit:
+            return "exercise.edit.nav.title".localized.translation
+        }
+    }
     
     var isEditing: Bool {
         displayMode == .edit
@@ -80,7 +86,7 @@ final class ExerciseViewModel: ObservableObject {
         if let exerciseVO = input.exerciseVO {
             self.state = .init(exerciseVO: exerciseVO, displayMode: .edit, isSavedOnCloud: exerciseVO.storageType == .remote)
         } else {
-            self.state = .init(exerciseVO: .empty, displayMode: .add, isCreating: true, didEdit: true)
+            self.state = .init(exerciseVO: .empty, displayMode: .add)
         }
     }
     
@@ -114,7 +120,7 @@ final class ExerciseViewModel: ObservableObject {
     }
     
     func onBackTap(dismiss: DismissAction) {
-        if state.isEditing && state.didEdit {
+        if state.isEditing {
             state.alert = .init(
                 title: "exercise.leave.alert.title".localized,
                 message: "exercise.leave.alert.message".localized,
@@ -163,7 +169,13 @@ private extension ExerciseViewModel {
         state.isLoading = true
         
         do {
-            try exerciseClient.saveExercise(state.exerciseVO, state.exerciseVO.id)
+            switch state.displayMode {
+            case .add:
+                try handleExerciseAdd()
+            case .edit:
+                try handleExerciseEdit()
+            }
+                
             dismiss()
         } catch {
             state.alert = .init(
@@ -173,6 +185,26 @@ private extension ExerciseViewModel {
         }
         
         state.isLoading = false
+    }
+    
+    func handleExerciseAdd() throws {
+        if state.isSavedOnCloud {
+            try exerciseClient.saveExercise(state.exerciseVO, nil)
+        } else {
+            // save to local
+        }
+    }
+    
+    func handleExerciseEdit() throws {
+        if state.isSavedOnCloud, state.exerciseVO.storageType == .remote {
+            try exerciseClient.saveExercise(state.exerciseVO, state.exerciseVO.id)
+        } else if state.isSavedOnCloud, state.exerciseVO.storageType == .local {
+            // remove from local
+            try exerciseClient.saveExercise(state.exerciseVO, nil)
+        } else if !state.isSavedOnCloud, state.exerciseVO.storageType == .remote, let id = state.exerciseVO.id {
+            try exerciseClient.deleteExercise(id)
+            // add to local
+        }
     }
 }
 

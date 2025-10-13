@@ -23,10 +23,10 @@ struct MainView: View {
                     ExerciseFeatureFactory.createExerciseListView()
                         .navigationDestination(for: ExercisePath.self) { path in
                             switch path {
-                            case .exercise(let exercise):
+                            case .exerciseCreate:
+                                ExerciseFeatureFactory.createExerciseView(exercise: nil)
+                            case .exerciseEdit(let exercise):
                                 ExerciseFeatureFactory.createExerciseView(exercise: exercise)
-                            case .exerciseDetail:
-                                EmptyView()
                             }
                         }
                 }
