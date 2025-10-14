@@ -11,7 +11,8 @@ enum ExerciseEntityMapper {
             title: exercise.exercise.rawValue,
             description: exercise.description.trimmingCharacters(in: .whitespacesAndNewlines),
             durationMinutes: exercise.durationMinutes,
-            locationName: exercise.locationName ?? ""
+            locationName: exercise.locationName ?? "",
+            createdAt: exercise.createdAt
         )
     }
 }

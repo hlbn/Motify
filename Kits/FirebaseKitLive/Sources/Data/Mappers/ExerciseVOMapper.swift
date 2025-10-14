@@ -21,7 +21,8 @@ enum ExerciseVOMapper {
             description: entity.description,
             durationMinutes: entity.durationMinutes,
             storageType: .remote,
-            locationName: entity.locationName
+            locationName: entity.locationName,
+            createdAt: entity.createdAt
         )
     }
 }

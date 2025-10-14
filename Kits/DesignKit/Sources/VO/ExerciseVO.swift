@@ -1,13 +1,12 @@
 //
 
 import SwiftUI
-import MapKit
 import UtilityKit
 
 
 public struct ExerciseVO: Identifiable, Equatable, Hashable {
     
-    public enum StorageType {
+    public enum StorageType: String {
         case local
         case remote
     }
@@ -69,6 +68,7 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
     public var durationMinutes: Int
     public var storageType: StorageType
     public var locationName: String?
+    public var createdAt: Date
     
     
     // MARK: - Init
@@ -79,7 +79,8 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
         description: String,
         durationMinutes: Int,
         storageType: StorageType,
-        locationName: String?
+        locationName: String?,
+        createdAt: Date
     ) {
         self.id = id
         self.exercise = exercise
@@ -87,6 +88,7 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
         self.durationMinutes = durationMinutes
         self.storageType = storageType
         self.locationName = locationName
+        self.createdAt = createdAt
     }
 }
 
@@ -102,7 +104,8 @@ public extension ExerciseVO {
             description: "",
             durationMinutes: 0,
             storageType: .local,
-            locationName: nil
+            locationName: nil,
+            createdAt: Date.now
         )
     }
 }
@@ -120,7 +123,8 @@ public extension [ExerciseVO] {
                 description: "Preview description",
                 durationMinutes: 0,
                 storageType: .local,
-                locationName: "Americká"
+                locationName: "Americká",
+                createdAt: Date.now.addingTimeInterval(-2600)
             ),
             .init(
                 id: "initial",
@@ -128,7 +132,8 @@ public extension [ExerciseVO] {
                 description: "Preview description",
                 durationMinutes: 0,
                 storageType: .remote,
-                locationName: "Americká"
+                locationName: "Americká",
+                createdAt: Date.now.addingTimeInterval(-3600)
             )
         ]
     }
@@ -143,7 +148,8 @@ public extension ExerciseVO {
             description: "Intensive chest pump workout",
             durationMinutes: 0,
             storageType: .remote,
-            locationName: "Americká"
+            locationName: "Americká",
+            createdAt: Date.now.addingTimeInterval(-2600)
         )
     }
 }

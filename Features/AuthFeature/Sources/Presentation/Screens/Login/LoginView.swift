@@ -68,6 +68,9 @@ struct LoginView: View {
         .navigationBarHidden(true)
         .alert($viewModel.state.alert)
         .loading(viewModel.state.isLoading)
+        .task {
+            await viewModel.task(router: router)
+        }
     }
     
     

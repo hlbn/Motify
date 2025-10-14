@@ -5,6 +5,7 @@ import NavigationKit
 import SwiftUI
 import MapKit
 import MapItemPicker
+import SwiftData
 import UtilityKit
 
 
@@ -14,6 +15,8 @@ struct ExerciseView: View {
     
     @StateObject private var viewModel: ExerciseViewModel
     @EnvironmentObject private var router: ExerciseRouter
+    @Environment(\.modelContext) private var modelContext
+    @Query var localExercises: [LocalExerciseItem]
     
     
     // MARK: - Environment
@@ -103,7 +106,7 @@ struct ExerciseView: View {
             }
             
             PrimaryButton("exercise.save".localized) {
-                viewModel.onSaveTap(dismiss: dismiss)
+                Task { await viewModel.onSaveTap(context: modelContext, dismiss: dismiss) }
             }
         }
         .background(Color.backgroundMain)
@@ -113,7 +116,10 @@ struct ExerciseView: View {
         .toolbarBackground(Color.backgroundMain, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .alert($viewModel.state.alert)
-        .loading(viewModel.state.isLoading)
+        .loading(viewModel.state.isLoading, isTransparent: true)
+        .onAppear {
+            viewModel.onAppear(localExercises: localExercises)
+        }
     }
     
     

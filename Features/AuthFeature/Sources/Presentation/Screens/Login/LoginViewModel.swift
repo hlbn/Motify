@@ -19,7 +19,7 @@ struct LoginViewState {
     var password: String = .empty
     
     var alert: AlertVO?
-    var isLoading = false
+    var isLoading = true
     
     
     // MARK: - Computed properties
@@ -52,6 +52,25 @@ final class LoginViewModel: ObservableObject {
     
     
     // MARK: - Actions
+    
+    func task(router: AuthRouter) async {
+        guard let savedCredentials = loginClient.savedCredentials else {
+            state.isLoading = false
+            return
+        }
+        
+        do {
+            try await authClient.login(savedCredentials.username, savedCredentials.password)
+            router.setAuthState(isLoggedIn: true)
+            
+            // For smoother transition
+            try? await Task.sleep(for: .seconds(0.2))
+        } catch {
+            Logger.main.notice("Couldn't perform login with saved credentials")
+        }
+        
+        state.isLoading = false
+    }
     
     func onLoginTap(router: AuthRouter) async {
         await performLogin(router: router, username: state.email, password: state.password)
@@ -91,6 +110,9 @@ private extension LoginViewModel {
             state.password = .empty
             
             router.setAuthState(isLoggedIn: true)
+            
+            // For smoother transition
+            try? await Task.sleep(for: .seconds(0.2))
         } catch {
             state.alert = .init(title: "login.auth.error".localized)
         }

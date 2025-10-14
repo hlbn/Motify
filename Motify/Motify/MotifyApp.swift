@@ -1,6 +1,8 @@
 //
 
 import SwiftUI
+import SwiftData
+import DesignKit
 
 
 @main
@@ -16,5 +18,6 @@ struct MotifyApp: App {
         WindowGroup {
             AuthView()
         }
+        .modelContainer(for: LocalExerciseItem.self)
     }
 }

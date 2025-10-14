@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 import Dependencies
 import MapKit
+import SwiftData
 import UtilityKit
 
 
@@ -23,6 +24,8 @@ struct ExerciseViewState {
     
     
     // MARK: - Properties
+    
+    fileprivate var localExercises = [LocalExerciseItem]()
     
     var exerciseVO: ExerciseVO
     var displayMode: DisplayMode
@@ -93,8 +96,12 @@ final class ExerciseViewModel: ObservableObject {
     
     // MARK: - Actions
     
-    func onSaveTap(dismiss: DismissAction) {
-        performSaveIfPossible(dismiss: dismiss)
+    func onAppear(localExercises: [LocalExerciseItem]) {
+        state.localExercises = localExercises
+    }
+    
+    func onSaveTap(context: ModelContext, dismiss: DismissAction) async {
+        await performSaveIfPossible(context: context, dismiss: dismiss)
     }
     
     func onTypePickerTap() {
@@ -142,7 +149,7 @@ final class ExerciseViewModel: ObservableObject {
 
 private extension ExerciseViewModel {
     
-    func performSaveIfPossible(dismiss: DismissAction) {
+    func performSaveIfPossible(context: ModelContext, dismiss: DismissAction) async {
         let exercise = state.exerciseVO
         let errors: [String] = [
             exercise.durationMinutes > 0 ? nil : "exercise.error.zerolength",
@@ -152,7 +159,7 @@ private extension ExerciseViewModel {
         .compactMap { $0 }
         
         if errors.isEmpty {
-            saveExercise(dismiss: dismiss)
+            await saveExercise(context: context, dismiss: dismiss)
         } else {
             var message = "exercise.save.error".localized.translation + "\n\n"
             message.append(errors.map(\.localized.translation).joined(separator: "\n"))
@@ -164,18 +171,18 @@ private extension ExerciseViewModel {
         }
     }
     
-    func saveExercise(dismiss: DismissAction) {
+    func saveExercise(context: ModelContext, dismiss: DismissAction) async {
         UIApplication.hideKeyboard()
         state.isLoading = true
         
         do {
             switch state.displayMode {
             case .add:
-                try handleExerciseAdd()
+                try handleExerciseAdd(context: context)
             case .edit:
-                try handleExerciseEdit()
+                try handleExerciseEdit(context: context)
             }
-                
+             
             dismiss()
         } catch {
             state.alert = .init(
@@ -187,23 +194,41 @@ private extension ExerciseViewModel {
         state.isLoading = false
     }
     
-    func handleExerciseAdd() throws {
+    func handleExerciseAdd(context: ModelContext) throws {
         if state.isSavedOnCloud {
             try exerciseClient.saveExercise(state.exerciseVO, nil)
         } else {
-            // save to local
+            let item = LocalExerciseItem(from: state.exerciseVO)
+            context.insert(item)
+            
+            try? context.save()
         }
     }
     
-    func handleExerciseEdit() throws {
+    func handleExerciseEdit(context: ModelContext) throws {
+        guard let id = state.exerciseVO.id else {
+            return
+        }
+        
         if state.isSavedOnCloud, state.exerciseVO.storageType == .remote {
-            try exerciseClient.saveExercise(state.exerciseVO, state.exerciseVO.id)
+            try exerciseClient.saveExercise(state.exerciseVO, id)
         } else if state.isSavedOnCloud, state.exerciseVO.storageType == .local {
-            // remove from local
+            guard let item = state.localExercises.first(where: { $0.id == id }) else {
+                Logger.main.error("Failed to update exercise, no exercise with id: \(id) found")
+                return
+            }
+            
+            context.delete(item)
+            try context.save()
+            
             try exerciseClient.saveExercise(state.exerciseVO, nil)
-        } else if !state.isSavedOnCloud, state.exerciseVO.storageType == .remote, let id = state.exerciseVO.id {
+        } else if !state.isSavedOnCloud, state.exerciseVO.storageType == .remote {
             try exerciseClient.deleteExercise(id)
-            // add to local
+            
+            let item = LocalExerciseItem(from: state.exerciseVO)
+            context.insert(item)
+            
+            try context.save()
         }
     }
 }
