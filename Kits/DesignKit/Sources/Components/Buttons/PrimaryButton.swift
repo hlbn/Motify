@@ -22,7 +22,7 @@ public struct PrimaryButton: View {
                 .padding(vertical: 12, horizontal: 34)
                 .background(
                     Capsule()
-                        .fill(Color.secondaryBlue)
+                        .fill(Color.mainBlue)
                 )
         }
     }

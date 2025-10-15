@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4ACD0F32EA03F3700DECC68 /* DataKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4ACD0F22EA03F3700DECC68 /* DataKit */; };
+		A4ACD0F52EA03F6E00DECC68 /* ProfileFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A4ACD0F42EA03F6E00DECC68 /* ProfileFeature */; };
 		A4B16B862E9AA87A00DBD4F7 /* ExerciseFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */; };
 		A4B86CF12E8C56A5008F052D /* AuthFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A4B86CF02E8C56A5008F052D /* AuthFeature */; };
 		A4C73D8B2E8448B300E85E87 /* DesignKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8A2E8448B300E85E87 /* DesignKit */; };
 		A4C73D8D2E8448B300E85E87 /* FirebaseKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8C2E8448B300E85E87 /* FirebaseKit */; };
 		A4C73D8F2E8448B300E85E87 /* NavigationKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D8E2E8448B300E85E87 /* NavigationKit */; };
 		A4C73D912E8448B300E85E87 /* UtilityKit in Frameworks */ = {isa = PBXBuildFile; productRef = A4C73D902E8448B300E85E87 /* UtilityKit */; };
-		A4E778CA2E9AD41700E4BC5C /* FirebaseKitLive in Frameworks */ = {isa = PBXBuildFile; productRef = A4E778C92E9AD41700E4BC5C /* FirebaseKitLive */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +34,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4ACD0F32EA03F3700DECC68 /* DataKit in Frameworks */,
 				A4C73D8D2E8448B300E85E87 /* FirebaseKit in Frameworks */,
 				A4B86CF12E8C56A5008F052D /* AuthFeature in Frameworks */,
-				A4E778CA2E9AD41700E4BC5C /* FirebaseKitLive in Frameworks */,
+				A4ACD0F52EA03F6E00DECC68 /* ProfileFeature in Frameworks */,
 				A4C73D8B2E8448B300E85E87 /* DesignKit in Frameworks */,
 				A4B16B862E9AA87A00DBD4F7 /* ExerciseFeature in Frameworks */,
 				A4C73D912E8448B300E85E87 /* UtilityKit in Frameworks */,
@@ -97,7 +99,8 @@
 				A4C73D902E8448B300E85E87 /* UtilityKit */,
 				A4B86CF02E8C56A5008F052D /* AuthFeature */,
 				A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */,
-				A4E778C92E9AD41700E4BC5C /* FirebaseKitLive */,
+				A4ACD0F22EA03F3700DECC68 /* DataKit */,
+				A4ACD0F42EA03F6E00DECC68 /* ProfileFeature */,
 			);
 			productName = Motify;
 			productReference = A4BBB1232E82FE6E00E1F4C7 /* Motify.app */;
@@ -407,6 +410,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A4ACD0F22EA03F3700DECC68 /* DataKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataKit;
+		};
+		A4ACD0F42EA03F6E00DECC68 /* ProfileFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ProfileFeature;
+		};
 		A4B16B852E9AA87A00DBD4F7 /* ExerciseFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ExerciseFeature;
@@ -430,10 +441,6 @@
 		A4C73D902E8448B300E85E87 /* UtilityKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UtilityKit;
-		};
-		A4E778C92E9AD41700E4BC5C /* FirebaseKitLive */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FirebaseKitLive;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

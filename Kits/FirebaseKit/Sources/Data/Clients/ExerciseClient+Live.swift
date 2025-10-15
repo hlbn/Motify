@@ -2,7 +2,7 @@
 
 import Foundation
 import Dependencies
-import FirebaseKit
+import DataKit
 
 
 // MARK: - Dependency registration

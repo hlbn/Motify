@@ -9,17 +9,20 @@ public struct AuthClient: Sendable {
     public var register: @Sendable (_ username: String, _ password: String) async throws -> Void
     public var logout: @Sendable () throws -> Void
     public var getCurrentUserId: @Sendable () -> String?
+    public var getCurrentUserEmail: @Sendable () -> String?
     
     public init(
         login: @Sendable @escaping (_: String, _: String) async throws -> Void,
         register: @Sendable @escaping (_: String, _: String) async throws -> Void,
         logout: @Sendable @escaping () throws -> Void,
-        getCurrentUserId: @Sendable @escaping () -> String?
+        getCurrentUserId: @Sendable @escaping () -> String?,
+        getCurrentUserEmail: @Sendable @escaping () -> String?
     ) {
         self.login = login
         self.register = register
         self.logout = logout
         self.getCurrentUserId = getCurrentUserId
+        self.getCurrentUserEmail = getCurrentUserEmail
     }
 }
 
@@ -34,7 +37,8 @@ extension AuthClient: TestDependencyKey {
             login: { _, _ in },
             register: { _, _ in },
             logout: { },
-            getCurrentUserId: { nil }
+            getCurrentUserId: { nil },
+            getCurrentUserEmail: { "preview.email@gmail.com" }
         )
     }
 }

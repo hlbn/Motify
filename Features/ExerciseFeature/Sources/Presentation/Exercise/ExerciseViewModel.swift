@@ -1,7 +1,7 @@
 // swiftlint:disable line_length
 
 import DesignKit
-import FirebaseKit
+import DataKit
 import Foundation
 import NavigationKit
 import OSLog

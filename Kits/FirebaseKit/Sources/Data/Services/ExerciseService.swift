@@ -2,7 +2,7 @@
 
 @preconcurrency import FirebaseFirestore
 import Foundation
-import FirebaseKit
+import DataKit
 import DesignKit
 import Dependencies
 import UtilityKit

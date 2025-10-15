@@ -10,12 +10,13 @@ let package = Package(
     platforms: [.iOS(.v18)],
     products: [
         .singleTargetLibrary("DesignKit"),
+        .singleTargetLibrary("DataKit"),
         .singleTargetLibrary("FirebaseKit"),
-        .singleTargetLibrary("FirebaseKitLive"),
         .singleTargetLibrary("NavigationKit"),
         .singleTargetLibrary("UtilityKit")
     ],
     dependencies: [
+        .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.4.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", exact: "1.10.0")
     ],
@@ -28,15 +29,19 @@ let package = Package(
             resources: [.process("Assets")]
         ),
         .projectTarget(
-            name: "FirebaseKit",
-            dependencies: ["DesignKit", "UtilityKit"]
-        ),
-        // by making isolated firebase live kit we managed to fix Firebase linking issues in previews
-        .projectTarget(
-            name: "FirebaseKitLive",
+            name: "DataKit",
             dependencies: [
                 "DesignKit",
-                "FirebaseKit",
+                "UtilityKit",
+                .product(name: "KeychainSwift", package: "keychain-swift")
+            ]
+        ),
+        // by making isolated firebase kit we managed to fix Firebase linking issues in previews
+        .projectTarget(
+            name: "FirebaseKit",
+            dependencies: [
+                "DesignKit",
+                "DataKit",
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
@@ -48,7 +53,7 @@ let package = Package(
             name: "NavigationKit",
             dependencies: [
                 "UtilityKit",
-                "FirebaseKit"
+                "DataKit"
             ]
         ),
         .projectTarget(

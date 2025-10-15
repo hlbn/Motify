@@ -1,7 +1,7 @@
 //
 
 import DesignKit
-import FirebaseKit
+import DataKit
 import Foundation
 import NavigationKit
 import Dependencies
@@ -48,16 +48,18 @@ struct ExerciseListViewState {
     // MARK: - Computed properties
     
     var filteredExercises: [ExerciseVO] {
-        let exercises = exercisesVO + localExercisesVO
-        
         switch filter {
         case .all:
-            return exercises.sorted { $0.createdAt > $1.createdAt }
+            return allExercises.sorted { $0.createdAt > $1.createdAt }
         case .local:
-            return exercises.filter { $0.storageType == .local }.sorted { $0.createdAt > $1.createdAt }
+            return allExercises.filter { $0.storageType == .local }.sorted { $0.createdAt > $1.createdAt }
         case .remote:
-            return exercises.filter { $0.storageType == .remote }.sorted { $0.createdAt > $1.createdAt }
+            return allExercises.filter { $0.storageType == .remote }.sorted { $0.createdAt > $1.createdAt }
         }
+    }
+    
+    var allExercises: [ExerciseVO] {
+        exercisesVO + localExercisesVO
     }
     
     var showEmptyPlaceholder: Bool {
@@ -77,6 +79,7 @@ final class ExerciseListViewModel: ObservableObject {
     // MARK: - Services
 
     @Dependency(ExerciseClient.self) private var exerciseClient
+    @Dependency(UserDetailClient.self) private var userDetailClient
     
     
     // MARK: - Actions
@@ -95,6 +98,7 @@ final class ExerciseListViewModel: ObservableObject {
             Logger.main.error("Failed to load exercises")
         }
         
+        updateUserDetail()
         state.isLoading = false
     }
     
@@ -144,6 +148,28 @@ final class ExerciseListViewModel: ObservableObject {
                 locationName: $0.locationName,
                 createdAt: $0.createdAt
             )
+        }
+    }
+}
+
+
+// MARK: - Private methods
+
+private extension ExerciseListViewModel {
+    
+    func updateUserDetail() {
+        do {
+            let favoriteExercise = Dictionary(grouping: state.exercisesVO, by: \.exercise)
+                .max { $0.value.count < $1.value.count }?
+                .key ?? .none
+            
+            try userDetailClient.updateUserDetail(
+                favoriteExercise.rawValue,
+                state.allExercises.count,
+                state.allExercises.map(\.durationMinutes).reduce(0, +)
+            )
+        } catch {
+            Logger.main.error("updateUserDetail -> Failed to update user detail")
         }
     }
 }

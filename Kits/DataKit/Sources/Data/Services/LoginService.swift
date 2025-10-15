@@ -25,20 +25,20 @@ final class LoginService: Sendable {
     var savedCredentials: LoginCredentials? {
         get {
             guard
-                let username = keychain.get("motify.username"),
+                let email = keychain.get("motify.email"),
                 let password = keychain.get("motify.password")
             else {
                 return nil
             }
             
-            return .init(username: username, password: password)
+            return .init(email: email, password: password)
         } set {
             if let credentials = newValue {
-                keychain.set(credentials.username, forKey: "motify.username")
+                keychain.set(credentials.email, forKey: "motify.email")
                 keychain.set(credentials.password, forKey: "motify.password")
             } else {
-                keychain.delete("motify.username")
-                keychain.delete("motify.password")
+                keychain.delete("motify.email")
+                keychain.delete("motify.email")
             }
         }
     }

@@ -1,7 +1,7 @@
 //
 
 import DesignKit
-import FirebaseKit
+import DataKit
 import Foundation
 import NavigationKit
 import OSLog
@@ -60,7 +60,7 @@ final class LoginViewModel: ObservableObject {
         }
         
         do {
-            try await authClient.login(savedCredentials.username, savedCredentials.password)
+            try await authClient.login(savedCredentials.email, savedCredentials.password)
             let userId = authClient.getCurrentUserId()
             
             router.setCurrentUserId(id: userId)
@@ -76,7 +76,7 @@ final class LoginViewModel: ObservableObject {
     }
     
     func onLoginTap(router: AuthRouter) async {
-        await performLogin(router: router, username: state.email, password: state.password)
+        await performLogin(router: router, email: state.email, password: state.password)
     }
     
     func onEmailChange() {
@@ -97,18 +97,18 @@ private extension LoginViewModel {
     
     func setupInitial() {
         loginClient.purgeCredentialsIfNeeded()
-        state.email = loginClient.savedCredentials?.username ?? .empty
+        state.email = loginClient.savedCredentials?.email ?? .empty
     }
     
-    func performLogin(router: AuthRouter, username: String, password: String) async {
+    func performLogin(router: AuthRouter, email: String, password: String) async {
         UIApplication.hideKeyboard()
         
         state.isLoading = true
         
         do {
-            try await authClient.login(username, password)
+            try await authClient.login(email, password)
             
-            loginClient.savedCredentials = .init(username: username, password: password)
+            loginClient.savedCredentials = .init(email: email, password: password)
             
             state.password = .empty
             

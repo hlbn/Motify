@@ -1,7 +1,7 @@
 //
 
 import DesignKit
-import FirebaseKit
+import DataKit
 import Foundation
 import SwiftUI
 import Dependencies

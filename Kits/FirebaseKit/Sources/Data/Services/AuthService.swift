@@ -29,4 +29,9 @@ struct AuthService {
     func getCurrentUserId() -> String? {
         Auth.auth().currentUser?.uid
     }
+    
+    @Sendable
+    func getCurrentUserEmail() -> String? {
+        Auth.auth().currentUser?.email
+    }
 }

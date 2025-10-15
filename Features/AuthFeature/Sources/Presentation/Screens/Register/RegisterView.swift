@@ -20,10 +20,10 @@ struct RegisterView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 16) {
+            VStack(spacing: 24) {
                 VStack(spacing: 8) {
                     Text("register.title".localized.translation)
-                        .font(.title, color: .contentMain)
+                        .font(.largeTitle, color: .contentMain)
                     
                     Text("register.subtitle".localized.translation)
                         .font(.subheadline, color: .contentMain)
@@ -31,7 +31,7 @@ struct RegisterView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 8)
                 
-                VStack(spacing: 16) {
+                VStack(spacing: 24) {
                     UnderlinedTextField(
                         "email".localized,
                         text: $viewModel.state.email,
@@ -64,7 +64,7 @@ struct RegisterView: View {
                         viewModel.onRepeatedPasswordChange()
                     }
                     
-                    Button("register".localized.translation) {
+                    PrimaryButton("register".localized) {
                         Task {
                             await viewModel.onRegisterTap(dismissAction: dismiss)
                         }

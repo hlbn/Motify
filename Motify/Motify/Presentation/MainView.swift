@@ -4,6 +4,7 @@ import DesignKit
 import SwiftUI
 import NavigationKit
 import ExerciseFeature
+import ProfileFeature
 import SwiftData
 import OSLog
 import UtilityKit
@@ -38,6 +39,11 @@ struct MainView: View {
                     Label("tab.dashboard".localized.translation, systemImage: "figure.run")
                 }
                 .environmentObject(exerciseRouter)
+                
+                ProfileFeatureFactory.createProfileView()
+                    .tabItem {
+                        Label("tab.profile".localized.translation, systemImage: "person.crop.circle")
+                    }
             }
         }
         .tint(Color.mainBlue)

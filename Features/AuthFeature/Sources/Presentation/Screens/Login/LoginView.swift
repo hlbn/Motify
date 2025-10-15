@@ -17,12 +17,15 @@ struct LoginView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 16) {
-                
+            VStack(spacing: 24) {
+                Image(.logo)
+                    .resizable()
+                    .frame(size: 160)
+                    .padding(.top, 32)
                 
                 VStack(spacing: 8) {
                     Text("login.title".localized.translation)
-                        .font(.title, color: .contentMain)
+                        .font(.largeTitle, color: .contentMain)
                     
                     Text("login.subtitle".localized.translation)
                         .font(.subheadline, color: .contentMain)
@@ -30,7 +33,7 @@ struct LoginView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 8)
                 
-                VStack(spacing: 16) {
+                VStack(spacing: 24) {
                     UnderlinedTextField(
                         "email".localized,
                         text: $viewModel.state.email,
@@ -47,8 +50,12 @@ struct LoginView: View {
                         isSecure: true
                     )
                     .submitLabel(.done)
-                    
-                    Button("login".localized.translation) {
+                }
+                .padding(.horizontal, 24)
+                .animation(.easeIn, value: viewModel.state.emailError)
+                
+                VStack(spacing: 16) {
+                    PrimaryButton("login".localized) {
                         Task {
                             await viewModel.onLoginTap(router: router)
                         }
@@ -56,12 +63,10 @@ struct LoginView: View {
                     .padding(.top, 8)
                     .disabled(!viewModel.state.isLoginButtonEnabled)
                     
-                    Button("register".localized.translation) {
+                    SecondaryButton("register".localized) {
                         router.showRegisterView()
                     }
                 }
-                .padding(.horizontal, 24)
-                .animation(.easeIn, value: viewModel.state.emailError)
             }
         }
         .background(Color.backgroundMain)

@@ -10,11 +10,11 @@ let package = Package(
     platforms: [.iOS(.v18)],
     products: [
         .singleTargetLibrary("AuthFeature"),
-        .singleTargetLibrary("ExerciseFeature")
+        .singleTargetLibrary("ExerciseFeature"),
+        .singleTargetLibrary("ProfileFeature")
     ],
     dependencies: [
         .package(path: "../Kits"),
-        .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0"),
         .package(url: "https://github.com/lorenzofiamingo/swiftui-map-item-picker.git", exact: "2.0.0")
     ],
     targets: [
@@ -22,18 +22,27 @@ let package = Package(
             name: "AuthFeature",
             dependencies: [
                 .kit("DesignKit"),
-                .kit("FirebaseKit"),
+                .kit("DataKit"),
                 .kit("NavigationKit"),
-                .kit("UtilityKit"),
-                .product(name: "KeychainSwift", package: "keychain-swift")
-            ]
+                .kit("UtilityKit")
+            ],
+            resources: [.process("Assets")]
         ),
         .projectTarget(
             name: "ExerciseFeature",
             dependencies: [
                 .product(name: "MapItemPicker", package: "swiftui-map-item-picker"),
                 .kit("DesignKit"),
-                .kit("FirebaseKit"),
+                .kit("DataKit"),
+                .kit("NavigationKit"),
+                .kit("UtilityKit")
+            ]
+        ),
+        .projectTarget(
+            name: "ProfileFeature",
+            dependencies: [
+                .kit("DesignKit"),
+                .kit("DataKit"),
                 .kit("NavigationKit"),
                 .kit("UtilityKit")
             ]

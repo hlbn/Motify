@@ -1,7 +1,7 @@
 //
 
 import Foundation
-import FirebaseKit
+import DataKit
 import Dependencies
 
 
@@ -15,7 +15,8 @@ extension AuthClient: DependencyKey {
             login: service.login,
             register: service.register,
             logout: service.logout,
-            getCurrentUserId: service.getCurrentUserId
+            getCurrentUserId: service.getCurrentUserId,
+            getCurrentUserEmail: service.getCurrentUserEmail
         )
     }
 }

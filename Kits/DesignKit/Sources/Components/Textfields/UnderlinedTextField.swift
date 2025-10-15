@@ -59,7 +59,7 @@ public struct UnderlinedTextField: View {
                             anchor: UnitPoint(x: 0, y: -2)
                         )
                         .frame(alignment: .leading)
-                        .animation(.default, value: isFocused)
+                        .animation(.bouncy(duration: 0.5), value: isFocused)
                         .alignmentGuide(VerticalAlignment.textFieldVertical) { dimensions in
                             dimensions[.bottom] / 2
                         }
