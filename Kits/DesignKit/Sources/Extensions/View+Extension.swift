@@ -75,6 +75,15 @@ public extension View {
             self
         }
     }
+    
+    @ViewBuilder
+    func ifLet<Content: View, T: Equatable>(_ value: T?, @ViewBuilder transform: (Self, T) -> Content) -> some View {
+        if let value {
+            transform(self, value)
+        } else {
+            self
+        }
+    }
 }
 
 

@@ -31,7 +31,7 @@ struct ExerciseViewState {
     var displayMode: DisplayMode
     var isShowingMapPicker = false
     var isShowingTypePicker = false
-    var isSavedOnCloud = false
+    var isSavedOnCloud = true
     
     var alert: AlertVO?
     var isLoading = false

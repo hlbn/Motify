@@ -61,6 +61,9 @@ final class LoginViewModel: ObservableObject {
         
         do {
             try await authClient.login(savedCredentials.username, savedCredentials.password)
+            let userId = authClient.getCurrentUserId()
+            
+            router.setCurrentUserId(id: userId)
             router.setAuthState(isLoggedIn: true)
             
             // For smoother transition
@@ -109,6 +112,9 @@ private extension LoginViewModel {
             
             state.password = .empty
             
+            let userId = authClient.getCurrentUserId()
+            
+            router.setCurrentUserId(id: userId)
             router.setAuthState(isLoggedIn: true)
             
             // For smoother transition

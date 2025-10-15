@@ -15,6 +15,7 @@ struct ExerciseView: View {
     
     @StateObject private var viewModel: ExerciseViewModel
     @EnvironmentObject private var router: ExerciseRouter
+    @Environment(\.isLocalStorageDisabled) private var isLocalStorageDisabled
     @Environment(\.modelContext) private var modelContext
     @Query var localExercises: [LocalExerciseItem]
     
@@ -93,6 +94,7 @@ struct ExerciseView: View {
                     }
                     .toggleStyle(.switch)
                     .font(.caption, color: .contentMain)
+                    .disabled(isLocalStorageDisabled)
 
                 }
                 .padding(top: 12, leading: 24, bottom: 12, trailing: 24)

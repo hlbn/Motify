@@ -15,6 +15,7 @@ public final class AuthRouter: ObservableObject {
     
     @Published public var path = [AuthPath]()
     @Published public var isLoggedIn = false
+    @Published public var userId: String?
     
     
     // MARK: - Init
@@ -31,5 +32,9 @@ public final class AuthRouter: ObservableObject {
     
     public func setAuthState(isLoggedIn: Bool) {
         self.isLoggedIn = isLoggedIn
+    }
+    
+    public func setCurrentUserId(id: String?) {
+        userId = id
     }
 }

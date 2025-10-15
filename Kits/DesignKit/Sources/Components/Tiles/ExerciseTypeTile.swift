@@ -35,7 +35,7 @@ public struct ExerciseTypeTile: View {
                     .bold()
             }
             .padding(16)
-            .background(Color.content50)
+            .background(Color.mainBlue)
             .cornerRadius(16)
         }
         .animation(.snappy, value: exercise.icon)
