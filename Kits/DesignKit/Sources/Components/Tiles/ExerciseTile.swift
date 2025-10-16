@@ -32,7 +32,7 @@ public struct ExerciseTile: View {
                             .foregroundColor(.white)
                     }
                     
-                    if let locationName = viewObject.locationName {
+                    if let locationName = viewObject.locationName, !locationName.isEmpty {
                         HStack(spacing: 4) {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundStyle(Color.white)

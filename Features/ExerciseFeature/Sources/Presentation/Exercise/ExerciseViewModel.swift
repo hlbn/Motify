@@ -42,9 +42,9 @@ struct ExerciseViewState {
     var navigationTitle: String {
         switch displayMode {
         case .add:
-            return "exercise.add.nav.title".localized.translation
+            "exercise.add.nav.title".localized.translation
         case .edit:
-            return "exercise.edit.nav.title".localized.translation
+            "exercise.edit.nav.title".localized.translation
         }
     }
     
@@ -124,23 +124,6 @@ final class ExerciseViewModel: ObservableObject {
         
         state.exerciseVO.locationName = mapItem.name
         state.isShowingMapPicker = false
-    }
-    
-    func onBackTap(dismiss: DismissAction) {
-        if state.isEditing {
-            state.alert = .init(
-                title: "exercise.leave.alert.title".localized,
-                message: "exercise.leave.alert.message".localized,
-                buttons: [
-                    .destructive("exercise.leave.alert.confirm".localized) {
-                        dismiss()
-                    },
-                    .cancel()
-                ]
-            )
-        } else {
-            dismiss()
-        }
     }
 }
 

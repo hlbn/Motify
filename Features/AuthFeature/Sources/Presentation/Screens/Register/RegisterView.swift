@@ -21,6 +21,10 @@ struct RegisterView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
+                Image(.logo)
+                    .resizable()
+                    .frame(size: 160)
+                
                 VStack(spacing: 8) {
                     Text("register.title".localized.translation)
                         .font(.largeTitle, color: .contentMain)

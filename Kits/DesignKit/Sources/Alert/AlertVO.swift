@@ -35,7 +35,7 @@ public struct AlertVO: Identifiable, Equatable {
         // MARK: - Helpers
         
         public static func cancel(
-            _ title: Localization = "common_button_cancel".localized,
+            _ title: Localization = "common.button.cancel".localized,
             action: (() -> Void)? = nil
         ) -> Self {
             .init(role: .cancel, title: title, action: action)
@@ -46,7 +46,7 @@ public struct AlertVO: Identifiable, Equatable {
         }
         
         public static func `default`(
-            _ title: Localization = "common_button_ok".localized,
+            _ title: Localization = "common.button.ok".localized,
             action: (() -> Void)? = nil
         ) -> Self {
             .init(role: .none, title: title, action: action)
@@ -79,23 +79,5 @@ public struct AlertVO: Identifiable, Equatable {
         self.title = title
         self.message = message
         self.buttons = buttons
-    }
-}
-
-
-// MARK: - AlertVO Extension
-
-public extension AlertVO {
-    
-    static func commonError(action: (() -> Void)? = nil) -> AlertVO {
-        .init(
-            title: "common_dialog_error_title".localized,
-            message: "common_dialog_error_message".localized,
-            buttons: [
-                .default(
-                    action: action ?? { } // Empty closure otherwise user cannot dismiss the alert
-                )
-            ]
-        )
     }
 }

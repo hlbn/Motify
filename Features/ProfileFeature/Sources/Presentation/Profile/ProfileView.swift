@@ -21,7 +21,7 @@ struct ProfileView: View {
             VStack(spacing: 16) {
                 if let favoriteExercise = viewModel.state.favoriteExercise {
                     Text("profile.favorite.exercise".localized.translation)
-                        .font(.subheadline, color: .contentMain)
+                        .font(.title3, color: .contentMain)
                         .padding(top: 24, leading: 0, bottom: 12, trailing: 0)
                     
                     favoriteExercise.icon
@@ -82,6 +82,7 @@ struct ProfileView: View {
         }
         .background(Color.backgroundMain)
         .alert($viewModel.state.alert)
+        .loading(viewModel.state.isLoading)
         .task {
             await viewModel.task()
         }

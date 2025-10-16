@@ -20,6 +20,8 @@ struct ProfileViewState {
     var totalTrainings = 0
     var daysSinceLastTraining = 0
     var totalHours = ""
+    
+    var isLoading = false
 }
 
 @MainActor
@@ -47,6 +49,8 @@ final class ProfileViewModel: ObservableObject {
     // MARK: - Actions
     
     func task() async {
+        state.isLoading = true
+        
         do {
             let userDetail = try await userDetailClient.getUserDetail()
             
@@ -56,6 +60,8 @@ final class ProfileViewModel: ObservableObject {
         } catch {
             Logger.main.error("getUserDetail -> Failed to get user detail")
         }
+        
+        state.isLoading = false
     }
     
     func onLogoutTap(router: AuthRouter) {

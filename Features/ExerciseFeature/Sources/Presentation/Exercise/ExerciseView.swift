@@ -82,7 +82,7 @@ struct ExerciseView: View {
                             
                             Spacer()
                             
-                            Text(viewModel.state.exerciseVO.locationName ?? "exercise.location.empty")
+                            Text(viewModel.state.exerciseVO.locationName ?? "exercise.location.empty".localized.translation)
                                 .font(.caption2, color: viewModel.state.exerciseVO.locationName == nil ? .hintGray : .contentMain)
                         }
                     }
