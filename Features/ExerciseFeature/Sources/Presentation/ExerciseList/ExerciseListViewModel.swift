@@ -130,6 +130,7 @@ final class ExerciseListViewModel: ObservableObject {
                 try context.save()
                 
                 state.localExercisesVO.removeAll { $0.id == exerciseId }
+                updateUserDetail()
             }
         } catch {
             Logger.main.error("Failed to delete exercise")
