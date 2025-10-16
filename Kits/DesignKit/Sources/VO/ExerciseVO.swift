@@ -11,7 +11,7 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
         case remote
     }
     
-    public enum Exercise: String, CaseIterable, Comparable {
+    public enum Exercise: String, CaseIterable {
         case weightlift
         case run
         case walk
@@ -56,10 +56,6 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
             case .none:
                 Image(systemName: "figure.wave.circle.fill")
             }
-        }
-        
-        public static func < (lhs: ExerciseVO.Exercise, rhs: ExerciseVO.Exercise) -> Bool {
-            return lhs.rawValue < rhs.rawValue
         }
     }
     

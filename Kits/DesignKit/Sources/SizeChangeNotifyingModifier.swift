@@ -17,7 +17,7 @@ struct SizeChangeNotifyingModifier: ViewModifier {
             .background(
                 GeometryReader { proxy in
                     Color.clear
-                        .onChange(of: proxy.size) { value in
+                        .onChange(of: proxy.size) { _, value in
                             Task { onSizeChange(value) }
                         }
                         .onAppear { onSizeChange(proxy.size) }
