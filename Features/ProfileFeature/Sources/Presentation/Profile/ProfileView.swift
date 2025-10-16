@@ -42,7 +42,7 @@ struct ProfileView: View {
                     Text("profile.total.hours".localized.translation)
                         .font(.subheadline, color: .contentMain)
                     
-                    Text(viewModel.state.totalHours, format: .number)
+                    Text(viewModel.state.totalHours)
                         .font(.title3, color: .contentMain)
                         .bold()
                 }
@@ -81,7 +81,6 @@ struct ProfileView: View {
             }
         }
         .background(Color.backgroundMain)
-        .navigationBarHidden(false)
         .alert($viewModel.state.alert)
         .task {
             await viewModel.task()

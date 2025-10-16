@@ -159,9 +159,10 @@ private extension ExerciseListViewModel {
     
     func updateUserDetail() {
         do {
-            let favoriteExercise = Dictionary(grouping: state.exercisesVO, by: \.exercise)
-                .max { $0.value.count < $1.value.count }?
-                .key ?? .none
+            let exercisesCount = Dictionary(grouping: state.exercisesVO, by: \.exercise).mapValues { $0.count }
+            let favoriteExercise = exercisesCount.max { $0.value < $1.value }.flatMap { maxItem in
+                exercisesCount.values.filter { $0 == maxItem.value }.count == 1 ? maxItem.key : nil
+            } ?? .none
             
             try userDetailClient.updateUserDetail(
                 favoriteExercise.rawValue,

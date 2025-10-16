@@ -9,12 +9,12 @@ public struct UserDetailVO {
     
     public var favoriteExercise: String?
     public var totalTrainings: Int?
-    public var totalMinutesOfTraining: Double?
+    public var totalMinutesOfTraining: Int?
     
     
     // MARK: - Init
     
-    public init(favoriteExercise: String?, totalTrainings: Int?, totalMinutesOfTraining: Double?) {
+    public init(favoriteExercise: String?, totalTrainings: Int?, totalMinutesOfTraining: Int?) {
         self.favoriteExercise = favoriteExercise
         self.totalTrainings = totalTrainings
         self.totalMinutesOfTraining = totalMinutesOfTraining

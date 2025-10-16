@@ -18,9 +18,8 @@ struct ProfileViewState {
     
     var favoriteExercise: ExerciseVO.Exercise?
     var totalTrainings = 0
-    var lastTrainingDateFormatted: String?
     var daysSinceLastTraining = 0
-    var totalHours: Double = 0
+    var totalHours = ""
 }
 
 @MainActor
@@ -79,9 +78,10 @@ private extension ProfileViewModel {
         state.email = authClient.getCurrentUserEmail() ?? "unknown".localized.translation
     }
     
-    func minutesToHours(minutes: Double) -> Double {
+    func minutesToHours(minutes: Int) -> String {
         let hours = minutes / 60
-        let roundedHours = round(hours * 10) / 10.0
-        return roundedHours
+        let minutes = minutes % 60
+
+        return "\(hours)h \(minutes)m"
     }
 }

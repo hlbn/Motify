@@ -54,7 +54,7 @@ public struct ExerciseVO: Identifiable, Equatable, Hashable {
             case .box:
                 Image(systemName: "figure.boxing.circle.fill")
             case .none:
-                Image(systemName: "pencil.circle.fill")
+                Image(systemName: "figure.wave.circle.fill")
             }
         }
         
