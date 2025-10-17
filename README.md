@@ -1,6 +1,6 @@
 # Motify - Exercise tracking app
 
-*Swift 6*
+- *Swift 6*
 
 *Architecture & Navigation*
 - TCA + MVVM
