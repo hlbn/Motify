@@ -6,6 +6,7 @@ import DesignKit
 import UtilityKit
 
 
+// Live implementation and Service is inside FirebaseKit in order to fix Firebase linking issues in previews
 public struct UserDetailClient: Sendable {
     public var getUserDetail: @Sendable () async throws -> UserDetailVO
     public var updateUserDetail: @Sendable (String, Int, Int) throws -> Void

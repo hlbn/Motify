@@ -4,6 +4,7 @@ import Foundation
 import Dependencies
 
 
+// Live implementation and Service is inside FirebaseKit in order to fix Firebase linking issues in previews
 public struct AuthClient: Sendable {
     public var login: @Sendable (_ username: String, _ password: String) async throws -> Void
     public var register: @Sendable (_ username: String, _ password: String) async throws -> Void

@@ -5,6 +5,7 @@ import DesignKit
 import Dependencies
 
 
+// Live implementation and Service is inside FirebaseKit in order to fix Firebase linking issues in previews
 public struct ExerciseClient: Sendable {
     public var fetchExercises: @Sendable () async throws -> [ExerciseVO]
     public var saveExercise: @Sendable (ExerciseVO, _ id: String?) throws -> Void
