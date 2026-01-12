@@ -3,7 +3,7 @@
 - *Swift 6*
 
 *Architecture & Navigation*
-- TCA + MVVM
+- Clean Architecture + MVVM
 - Modularized
 - SwiftUI Navigation
 
